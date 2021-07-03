@@ -1,4 +1,4 @@
-import IConfig from "./IConfig.interface";
+import IConfig from "../common/IConfig.interface";
 
 const CFG: IConfig = {
     server: {
@@ -12,6 +12,15 @@ const CFG: IConfig = {
             etag: false,
             index: false,
         }
+    },
+    database: {
+        host: "localhost",
+        port: 3306,
+        user: "root",
+        password: "",
+        database: "pizzeria",
+        charset: "utf8",
+        timezone: "+01:00",
     }
 }
 
