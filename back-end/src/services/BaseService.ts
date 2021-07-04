@@ -19,7 +19,7 @@ export default abstract class BaseService<T extends IModel> {
         options: Partial<IAdaptModelOptions>
     ): Promise<T>
 
-    protected async getAllFromTable(tableName: string, options: Partial<IAdaptModelOptions> = {}): Promise<T[] | null | IErrorResponse> {
+    protected async getAllFromTable<AdapterOptions extends IAdaptModelOptions>(tableName: string, options: Partial<AdapterOptions> = {}): Promise<T[] | null | IErrorResponse> {
         return new Promise<T[] | null | IErrorResponse>(async resolve => {
             const sql: string = `SELECT * FROM ${tableName};`;
             this.conn.execute(sql)
@@ -44,7 +44,7 @@ export default abstract class BaseService<T extends IModel> {
         });
     }
 
-    protected async getByIdFromTable(tableName: string, id: number, options: Partial<IAdaptModelOptions> = {}): Promise<T | null | IErrorResponse> {
+    protected async getByIdFromTable<AdapterOptions extends IAdaptModelOptions>(tableName: string, id: number, options: Partial<AdapterOptions> = {}): Promise<T | null | IErrorResponse> {
         return new Promise<T | null | IErrorResponse>(async resolve => {
             const sql: string = `SELECT * FROM ${tableName} WHERE ${tableName}_id = ?;`;
             this.conn.execute(sql, [id])

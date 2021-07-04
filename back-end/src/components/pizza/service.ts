@@ -1,4 +1,3 @@
-import * as mysql2 from "mysql2/promise";
 import IAdaptModelOptions from "../../common/IAdaptModelOptions.interface";
 import IErrorResponse from "../../common/IErrorResponse.interface";
 import BaseService from "../../services/BaseService";
@@ -6,8 +5,12 @@ import { IAddPizza } from "./dto/AddPizza";
 import { IEditPizza } from "./dto/EditPizza";
 import PizzaModel from "./model";
 
+class PizzaModelAdapterOptions implements IAdaptModelOptions {
+    loadIngredients: boolean = false;
+}
+
 export default class PizzaService extends BaseService<PizzaModel>{
-    protected async adaptModel(row: any, options: Partial<IAdaptModelOptions> = { loadIngredients: true }): Promise<PizzaModel> {
+    protected async adaptModel(row: any, options: Partial<PizzaModelAdapterOptions> = {}): Promise<PizzaModel> {
         const pizza: PizzaModel = new PizzaModel();
 
         pizza.pizzaId = +(row?.pizza_id);
@@ -15,21 +18,21 @@ export default class PizzaService extends BaseService<PizzaModel>{
         pizza.imagePath = row?.image_path;
         pizza.price = +(row?.price);
         pizza.isActive = !!(row?.is_active);
-        pizza.ingredients = [];
 
-        if (options.loadIngredients) {
-            //.....
-        }
+
+        // if (options.loadIngredients) {
+        //     pizza.ingredients = [];
+        // }
 
         return pizza;
     }
 
     public async getAll(): Promise<PizzaModel[] | null | IErrorResponse> {
-        return await this.getAllFromTable("pizza", { loadIngredients: true });
+        return await this.getAllFromTable<PizzaModelAdapterOptions>("pizza");
     }
 
     public async getById(pizzaId: number): Promise<PizzaModel | null | IErrorResponse> {
-        return await this.getByIdFromTable("pizza", pizzaId, { loadIngredients: true });
+        return await this.getByIdFromTable<PizzaModelAdapterOptions>("pizza", pizzaId);
     }
 
     public async add(data: IAddPizza): Promise<PizzaModel | IErrorResponse> {

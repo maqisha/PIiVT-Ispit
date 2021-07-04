@@ -7,5 +7,5 @@ export default class PizzaModel implements IModel {
     price: number;
     isActive: boolean;
     imagePath: string | null = null;
-    ingredients: IngredientModel[] = [];
+    ingredients?: IngredientModel[];
 }
