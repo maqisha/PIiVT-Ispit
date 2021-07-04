@@ -1,10 +1,11 @@
 import * as express from "express";
 import IApplicationResources from "../../common/IApplicationResources.interface";
+import IRouter from "../../common/IRouter.interface";
 import PizzaController from "./controller";
 import PizzaService from "./service";
 
-export default class PizzaRouter {
-    public static setupRoutes(app: express.Application, resources: IApplicationResources) {
+export default class PizzaRouter implements IRouter {
+    public setupRoutes(app: express.Application, resources: IApplicationResources) {
         const pizzaService: PizzaService = new PizzaService(resources.conn);
         const pizzaController: PizzaController = new PizzaController(pizzaService);
 

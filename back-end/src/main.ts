@@ -4,6 +4,7 @@ import CFG from "./config/dev";
 import PizzaRouter from "./components/pizza/router";
 import * as mysql2 from "mysql2/promise";
 import IApplicationResources from "./common/IApplicationResources.interface";
+import Router from "./router";
 
 async function main() {
     const app: express.Application = express();
@@ -37,7 +38,9 @@ async function main() {
             dotfiles: CFG.server.static.dotfiles,
         }));
 
-    PizzaRouter.setupRoutes(app, resources);
+    Router.setupRoutes(app, resources, [
+        new PizzaRouter(),
+    ]);
 
     app.use((req, res) => {
         res.sendStatus(404);
