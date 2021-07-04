@@ -1,3 +1,3 @@
-export default interface AdaptModelOptions {
+export default interface IAdaptModelOptions {
     loadIngredients: boolean
 }

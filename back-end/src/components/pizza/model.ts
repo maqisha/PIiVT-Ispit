@@ -1,6 +1,7 @@
+import IModel from "../../common/IModel.interface";
 import IngredientModel from "../ingredient/model";
 
-export default class PizzaModel {
+export default class PizzaModel implements IModel {
     pizzaId: number;
     name: string;
     price: number;

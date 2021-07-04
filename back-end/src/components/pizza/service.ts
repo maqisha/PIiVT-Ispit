@@ -1,18 +1,12 @@
-import { Resolver } from "dns";
 import * as mysql2 from "mysql2/promise";
-import AdaptModelOptions from "../../common/IAdaptModelOptions.interface";
+import IAdaptModelOptions from "../../common/IAdaptModelOptions.interface";
 import IErrorResponse from "../../common/IErrorResponse.interface";
+import BaseService from "../../services/BaseService";
 import { IAddPizza } from "./dto/AddPizza";
 import PizzaModel from "./model";
 
-export default class PizzaService {
-    conn: mysql2.Connection;
-
-    constructor(conn: mysql2.Connection) {
-        this.conn = conn;
-    }
-
-    protected async adaptModel(row: any, options: Partial<AdaptModelOptions> = { loadIngredients: true }): Promise<PizzaModel> {
+export default class PizzaService extends BaseService<PizzaModel>{
+    protected async adaptModel(row: any, options: Partial<IAdaptModelOptions> = { loadIngredients: true }): Promise<PizzaModel> {
         const pizza: PizzaModel = new PizzaModel();
 
         pizza.pizzaId = +(row?.pizza_id);
@@ -30,59 +24,18 @@ export default class PizzaService {
     }
 
     public async getAll(): Promise<PizzaModel[] | null | IErrorResponse> {
-        return new Promise<PizzaModel[] | null | IErrorResponse>(async resolve => {
-            const sql: string = "SELECT * FROM pizza;";
-            this.conn.execute(sql)
-                .then(async result => {
-                    const [rows, columns] = result;
-                    const list: PizzaModel[] = [];
-
-                    if (Array.isArray(rows)) {
-                        for (const row of rows) {
-                            list.push(await this.adaptModel(row));
-                        };
-                    }
-
-                    resolve(list);
-                })
-                .catch(error => {
-                    resolve({
-                        errorCode: error?.errno,
-                        errorMessage: error?.sqlMessage,
-                    });
-                });
-        });
+        return await this.getAllFromTable("pizza", { loadIngredients: true });
     }
 
     public async getById(pizzaId: number): Promise<PizzaModel | null | IErrorResponse> {
-        return new Promise<PizzaModel | null | IErrorResponse>(async resolve => {
-            const sql: string = "SELECT * FROM pizza WHERE pizza_id = ?;";
-            this.conn.execute(sql, [pizzaId])
-                .then(async result => {
-                    const [rows, columns] = result;
-
-                    if (!Array.isArray(rows) || rows.length === 0) {
-                        resolve(null);
-                        return;
-                    }
-
-                    resolve(await this.adaptModel(rows[0]));
-                })
-                .catch(error => {
-                    resolve({
-                        errorCode: error?.errno,
-                        errorMessage: error?.sqlMessage,
-                    });
-                })
-
-        });
+        return await this.getByIdFromTable("pizza", pizzaId, { loadIngredients: true });
     }
 
     public async add(data: IAddPizza): Promise<PizzaModel | IErrorResponse> {
         return new Promise<PizzaModel | IErrorResponse>(async resolve => {
             const sql = "INSERT pizza SET name = ?, image_path = ?, price = ?;";
 
-            this.conn.execute(sql, [data.name, data.imagePath, data.price])
+            this.db.execute(sql, [data.name, data.imagePath, data.price])
                 .then(async result => {
                     const insertInfo: any = result[0];
 
