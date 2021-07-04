@@ -1,6 +1,8 @@
+import { Resolver } from "dns";
 import * as mysql2 from "mysql2/promise";
 import AdaptModelOptions from "../../common/IAdaptModelOptions.interface";
 import IErrorResponse from "../../common/IErrorResponse.interface";
+import { IAddPizza } from "./dto/AddPizza";
 import PizzaModel from "./model";
 
 export default class PizzaService {
@@ -74,5 +76,25 @@ export default class PizzaService {
                 })
 
         });
+    }
+
+    public async add(data: IAddPizza): Promise<PizzaModel | IErrorResponse> {
+        return new Promise<PizzaModel | IErrorResponse>(async resolve => {
+            const sql = "INSERT pizza SET name = ?, image_path = ?, price = ?;";
+
+            this.conn.execute(sql, [data.name, data.imagePath, data.price])
+                .then(async result => {
+                    const insertInfo: any = result[0];
+
+                    const newPizzaId: number = +(insertInfo?.insertId);
+                    resolve(await this.getById(newPizzaId));
+                })
+                .catch(error => {
+                    resolve({
+                        errorCode: error?.errno,
+                        errorMessage: error?.sqlMessage,
+                    })
+                });
+        })
     }
 }
