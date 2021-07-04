@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import IErrorResponse from "../../common/IErrorResponse.interface";
 import { IAddCategoryValidator, IAddPizza } from "./dto/AddPizza";
+import { IEditCategoryValidator, IEditPizza } from "./dto/EditPizza";
 import PizzaModel from "./model";
 import PizzaService from "./service";
 
@@ -58,6 +59,31 @@ export default class PizzaController {
         }
 
         const result: PizzaModel | IErrorResponse = await this.pizzaService.add(data as IAddPizza);
+
+        res.send(result);
+    }
+
+    async edit(req: Request, res: Response, next: NextFunction) {
+        const pizzaId: number = +(req.params.id);
+
+        if (pizzaId <= 0) {
+            res.sendStatus(400);
+            return;
+        }
+
+        const data = req.body;
+
+        if (!IEditCategoryValidator(data)) {
+            res.status(400).send(IEditCategoryValidator.errors);
+            return;
+        }
+
+        const result: PizzaModel | IErrorResponse = await this.pizzaService.edit(data as IEditPizza, pizzaId);
+
+        if (result === null) {
+            res.sendStatus(404);
+            return;
+        }
 
         res.send(result);
     }
