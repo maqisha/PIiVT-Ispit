@@ -46,6 +46,10 @@ async function main() {
         res.sendStatus(404);
     });
 
+    app.use((err, req, res, next)=>{
+        res.status(err.status).send(err.type);
+    });
+
     app.listen(CFG.server.port);
 }
 

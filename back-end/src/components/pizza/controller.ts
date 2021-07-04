@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import IErrorResponse from "../../common/IErrorResponse.interface";
 import PizzaModel from "./model";
 import PizzaService from "./service";
 
@@ -10,9 +11,19 @@ export default class PizzaController {
     }
 
     async getAll(req: Request, res: Response, next: NextFunction) {
-        const pizzas: PizzaModel[] | null = await this.pizzaService.getAll();
+        const data: PizzaModel[] | null | IErrorResponse = await this.pizzaService.getAll();
 
-        res.send(pizzas);
+        if(data === null) {
+            res.sendStatus(404);
+            return;
+        }
+        
+        if (Array.isArray(data)) {
+            res.send(data);
+            return;
+        }
+
+        res.status(500).send(data);
     }
 
     async getById(req: Request, res: Response, next: NextFunction) {
@@ -22,13 +33,18 @@ export default class PizzaController {
             res.sendStatus(400);
             return;
         }
-        const pizza: PizzaModel | null = await this.pizzaService.getById(pizzaId);
+        const data: PizzaModel | null | IErrorResponse = await this.pizzaService.getById(pizzaId);
 
-        if (pizza === null) {
+        if (data === null) {
             res.sendStatus(404);
             return;
         }
 
-        res.send(pizza);
+        if (data instanceof PizzaModel) {
+            res.send(data);
+            return;
+        }
+
+        res.status(500).send(data);
     }
 }

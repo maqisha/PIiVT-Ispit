@@ -1,5 +1,6 @@
 import * as mysql2 from "mysql2/promise";
 import AdaptModelOptions from "../../common/IAdaptModelOptions.interface";
+import IErrorResponse from "../../common/IErrorResponse.interface";
 import PizzaModel from "./model";
 
 export default class PizzaService {
@@ -26,30 +27,52 @@ export default class PizzaService {
         return pizza;
     }
 
-    public async getAll(): Promise<PizzaModel[]> {
-        const list: PizzaModel[] = [];
+    public async getAll(): Promise<PizzaModel[] | null | IErrorResponse> {
+        return new Promise<PizzaModel[] | null | IErrorResponse>(async resolve => {
+            const sql: string = "SELECT * FROM pizza;";
+            this.conn.execute(sql)
+                .then(async result => {
+                    const [rows, columns] = result;
+                    const list: PizzaModel[] = [];
 
-        const sql: string = "SELECT * FROM pizza;";
-        const [rows, columns] = await this.conn.execute(sql);
+                    if (Array.isArray(rows)) {
+                        for (const row of rows) {
+                            list.push(await this.adaptModel(row));
+                        };
+                    }
 
-        if (Array.isArray(rows)) {
-            for (const row of rows) {
-                list.push(await this.adaptModel(row));
-            };
-        }
-
-        return list;
+                    resolve(list);
+                })
+                .catch(error => {
+                    resolve({
+                        errorCode: error?.errno,
+                        errorMessage: error?.sqlMessage,
+                    });
+                });
+        });
     }
 
-    public async getById(pizzaId: number): Promise<PizzaModel | null> {
-        const sql: string = "SELECT * FROM pizza WHERE pizza_id = ?;";
-        const [rows, columns] = await this.conn.execute(sql, [pizzaId]);
+    public async getById(pizzaId: number): Promise<PizzaModel | null | IErrorResponse> {
+        return new Promise<PizzaModel | null | IErrorResponse>(async resolve => {
+            const sql: string = "SELECT * FROM pizza WHERE pizza_id = ?;";
+            this.conn.execute(sql, [pizzaId])
+                .then(async result => {
+                    const [rows, columns] = result;
 
-        if (!Array.isArray(rows) || rows.length === 0) {
-            return null;
-        }
+                    if (!Array.isArray(rows) || rows.length === 0) {
+                        resolve(null);
+                        return;
+                    }
 
-        return await this.adaptModel(rows[0])
+                    resolve(await this.adaptModel(rows[0]));
+                })
+                .catch(error => {
+                    resolve({
+                        errorCode: error?.errno,
+                        errorMessage: error?.sqlMessage,
+                    });
+                })
 
+        });
     }
 }
