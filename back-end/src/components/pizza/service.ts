@@ -27,12 +27,12 @@ export default class PizzaService extends BaseService<PizzaModel>{
         return pizza;
     }
 
-    public async getAll(): Promise<PizzaModel[] | null | IErrorResponse> {
-        return await this.getAllFromTable<PizzaModelAdapterOptions>("pizza");
+    public async getAll(options: Partial<PizzaModelAdapterOptions> = {}): Promise<PizzaModel[] | null | IErrorResponse> {
+        return await this.getAllFromTable<PizzaModelAdapterOptions>("pizza", options);
     }
 
-    public async getById(pizzaId: number): Promise<PizzaModel | null | IErrorResponse> {
-        return await this.getByIdFromTable<PizzaModelAdapterOptions>("pizza", pizzaId);
+    public async getById(pizzaId: number, options: Partial<PizzaModelAdapterOptions> = {}): Promise<PizzaModel | null | IErrorResponse> {
+        return await this.getByIdFromTable<PizzaModelAdapterOptions>("pizza", pizzaId, options);
     }
 
     public async add(data: IAddPizza): Promise<PizzaModel | IErrorResponse> {
@@ -72,7 +72,7 @@ export default class PizzaService extends BaseService<PizzaModel>{
 
             this.db.execute(sql, [data.name, data.imagePath, data.price, pizzaId])
                 .then(async result => {
-                    resolve(await this.getById(pizzaId));
+                    resolve(await this.getById(pizzaId, { loadIngredients: true }));
                 })
                 .catch(error => {
                     resolve({
@@ -80,6 +80,35 @@ export default class PizzaService extends BaseService<PizzaModel>{
                         errorMessage: error?.sqlMessage,
                     })
                 });
+        })
+    }
+
+    public async delete(pizzaId: number): Promise<IErrorResponse> {
+        return new Promise<IErrorResponse>(resolve => {
+            const sql = "DELETE FROM pizza WHERE pizza_id = ?;";
+            this.db.execute(sql, [pizzaId])
+                .then(async result => {
+                    const deleteInfo: any = result[0];
+                    const deletedRowCount: number = +(deleteInfo?.affectedRows);
+
+                    if (deletedRowCount === 1) {
+                        resolve({
+                            errorCode: 0,
+                            errorMessage: "1 record deleted!"
+                        })
+                    } else {
+                        resolve({
+                            errorCode: -1,
+                            errorMessage: "Record could not be deleted!"
+                        })
+                    }
+                })
+                .catch(error => {
+                    resolve({
+                        errorCode: error?.errno,
+                        errorMessage: error?.sqlMessage,
+                    })
+                })
         })
     }
 }

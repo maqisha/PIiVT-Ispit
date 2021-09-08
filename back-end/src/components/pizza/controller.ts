@@ -32,7 +32,7 @@ export default class PizzaController {
         const pizzaId: number = +req.params.id;
 
         if (pizzaId <= 0) {
-            res.sendStatus(400);
+            res.status(400).send("Invalid ID number.");
             return;
         }
         const data: PizzaModel | null | IErrorResponse = await this.pizzaService.getById(pizzaId);
@@ -67,7 +67,7 @@ export default class PizzaController {
         const pizzaId: number = +(req.params.id);
 
         if (pizzaId <= 0) {
-            res.sendStatus(400);
+            res.status(400).send("Invalid ID number.");
             return;
         }
 
@@ -86,5 +86,16 @@ export default class PizzaController {
         }
 
         res.send(result);
+    }
+    
+    async delete(req: Request, res: Response, next: NextFunction) {
+        const pizzaId: number = +(req.params.id);
+
+        if (pizzaId <= 0) {
+            res.status(400).send("Invalid ID number.");
+            return;
+        }
+
+        res.send(await this.pizzaService.delete(pizzaId));
     }
 }

@@ -13,5 +13,6 @@ export default class PizzaRouter implements IRouter {
         app.get("/pizza/:id", pizzaController.getById.bind(pizzaController));
         app.post("/pizza", pizzaController.add.bind(pizzaController));
         app.put("/pizza/:id", pizzaController.edit.bind(pizzaController));
+        app.delete("/pizza/:id", pizzaController.delete.bind(pizzaController));
     }
 }
