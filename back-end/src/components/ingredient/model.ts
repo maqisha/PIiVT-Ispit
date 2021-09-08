@@ -1,4 +1,5 @@
-export default class IngredientModel {
+import IModel from "../../common/IModel.interface";
+export default class IngredientModel implements IModel {
     ingredientId: number;
     name: string;
     price: number;

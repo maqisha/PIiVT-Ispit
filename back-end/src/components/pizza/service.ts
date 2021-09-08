@@ -4,12 +4,23 @@ import BaseService from "../../services/BaseService";
 import { IAddPizza } from "./dto/AddPizza";
 import { IEditPizza } from "./dto/EditPizza";
 import PizzaModel from "./model";
+import * as mysql2 from "mysql2/promise";
+import IngredientService from "../ingredient/service";
 
 class PizzaModelAdapterOptions implements IAdaptModelOptions {
     loadIngredients: boolean = false;
 }
 
 export default class PizzaService extends BaseService<PizzaModel>{
+    // private ingredientService: IngredientService;
+    
+    // constructor(db: mysql2.Connection) {
+    //     super(db);
+
+    //     this.ingredientService = new IngredientService(this.db);
+    // }
+
+
     protected async adaptModel(row: any, options: Partial<PizzaModelAdapterOptions> = {}): Promise<PizzaModel> {
         const pizza: PizzaModel = new PizzaModel();
 
@@ -42,7 +53,6 @@ export default class PizzaService extends BaseService<PizzaModel>{
             this.db.execute(sql, [data.name, data.imagePath, data.price])
                 .then(async result => {
                     const insertInfo: any = result[0];
-
                     const newPizzaId: number = +(insertInfo?.insertId);
                     resolve(await this.getById(newPizzaId));
                 })
@@ -55,7 +65,7 @@ export default class PizzaService extends BaseService<PizzaModel>{
         })
     }
 
-    public async edit(data: IEditPizza, pizzaId: number): Promise<PizzaModel | null | IErrorResponse> {
+    public async edit(newPizza: IEditPizza, pizzaId: number): Promise<PizzaModel | null | IErrorResponse> {
         return new Promise<PizzaModel | null | IErrorResponse>(async resolve => {
             const oldPizza = await this.getById(pizzaId);
 
@@ -70,7 +80,7 @@ export default class PizzaService extends BaseService<PizzaModel>{
 
             const sql = "UPDATE pizza SET name = ?, image_path = ?, price = ? WHERE pizza_id = ?;";
 
-            this.db.execute(sql, [data.name, data.imagePath, data.price, pizzaId])
+            this.db.execute(sql, [newPizza.name, newPizza.imagePath, newPizza.price, pizzaId])
                 .then(async result => {
                     resolve(await this.getById(pizzaId, { loadIngredients: true }));
                 })

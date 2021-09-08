@@ -8,7 +8,7 @@ interface IAddPizza {
 
 const ajv = Ajv();
 
-const IAddCategoryValidator = ajv.compile({
+const IAddPizzaValidator = ajv.compile({
     type: "object",
     properties: {
         name: {
@@ -35,4 +35,4 @@ const IAddCategoryValidator = ajv.compile({
 })
 
 export { IAddPizza };
-export { IAddCategoryValidator };
+export { IAddPizzaValidator };

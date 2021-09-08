@@ -1,14 +1,13 @@
 import * as Ajv from "ajv";
 
-interface IEditPizza {
+interface IAddIngredient {
     name: string,
-    imagePath: string,
     price: number
 }
 
 const ajv = Ajv();
 
-const IEditPizzaValidator = ajv.compile({
+const IAddIngredientValidator = ajv.compile({
     type: "object",
     properties: {
         name: {
@@ -16,23 +15,17 @@ const IEditPizzaValidator = ajv.compile({
             minLength: 2,
             maxLength: 50,
         },
-        imagePath: {
-            type: "string",
-            maxLength: 255,
-            pattern: "\.(png|jpg)$",
-        },
         price: {
             type: "number",
-            minimum: 1
+            minimum: 0
         },
     },
     required: [
         "name",
-        "imagePath",
         "price",
     ],
     additionalProperties: false,
 })
 
-export { IEditPizza };
-export { IEditPizzaValidator };
+export { IAddIngredient };
+export { IAddIngredientValidator };

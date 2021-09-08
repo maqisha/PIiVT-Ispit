@@ -5,6 +5,7 @@ import PizzaRouter from "./components/pizza/router";
 import * as mysql2 from "mysql2/promise";
 import IApplicationResources from "./common/IApplicationResources.interface";
 import Router from "./router";
+import IngredientRouter from "./components/ingredient/router";
 
 async function main() {
     const app: express.Application = express();
@@ -40,6 +41,7 @@ async function main() {
 
     Router.setupRoutes(app, resources, [
         new PizzaRouter(),
+        new IngredientRouter(),
     ]);
 
     app.use((req, res) => {

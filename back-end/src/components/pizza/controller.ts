@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import IErrorResponse from "../../common/IErrorResponse.interface";
-import { IAddCategoryValidator, IAddPizza } from "./dto/AddPizza";
-import { IEditCategoryValidator, IEditPizza } from "./dto/EditPizza";
+import { IAddPizzaValidator, IAddPizza } from "./dto/AddPizza";
+import { IEditPizzaValidator, IEditPizza } from "./dto/EditPizza";
 import PizzaModel from "./model";
 import PizzaService from "./service";
 
@@ -12,7 +12,7 @@ export default class PizzaController {
         this.pizzaService = pizzaService;
     }
 
-    async getAll(req: Request, res: Response, next: NextFunction) {
+    public async getAll(req: Request, res: Response, next: NextFunction) {
         const data: PizzaModel[] | null | IErrorResponse = await this.pizzaService.getAll();
 
         if (data === null) {
@@ -28,7 +28,7 @@ export default class PizzaController {
         res.status(500).send(data);
     }
 
-    async getById(req: Request, res: Response, next: NextFunction) {
+    public async getById(req: Request, res: Response, next: NextFunction) {
         const pizzaId: number = +req.params.id;
 
         if (pizzaId <= 0) {
@@ -50,11 +50,11 @@ export default class PizzaController {
         res.status(500).send(data);
     }
 
-    async add(req: Request, res: Response, next: NextFunction) {
+    public async add(req: Request, res: Response, next: NextFunction) {
         const data = req.body;
 
-        if (!IAddCategoryValidator(data)) {
-            res.status(400).send(IAddCategoryValidator.errors);
+        if (!IAddPizzaValidator(data)) {
+            res.status(400).send(IAddPizzaValidator.errors);
             return;
         }
 
@@ -63,7 +63,7 @@ export default class PizzaController {
         res.send(result);
     }
 
-    async edit(req: Request, res: Response, next: NextFunction) {
+    public async edit(req: Request, res: Response, next: NextFunction) {
         const pizzaId: number = +(req.params.id);
 
         if (pizzaId <= 0) {
@@ -73,12 +73,12 @@ export default class PizzaController {
 
         const data = req.body;
 
-        if (!IEditCategoryValidator(data)) {
-            res.status(400).send(IEditCategoryValidator.errors);
+        if (!IEditPizzaValidator(data)) {
+            res.status(400).send(IEditPizzaValidator.errors);
             return;
         }
 
-        const result: PizzaModel | IErrorResponse = await this.pizzaService.edit(data as IEditPizza, pizzaId);
+        const result: PizzaModel | null | IErrorResponse = await this.pizzaService.edit(data as IEditPizza, pizzaId);
 
         if (result === null) {
             res.sendStatus(404);
@@ -87,8 +87,8 @@ export default class PizzaController {
 
         res.send(result);
     }
-    
-    async delete(req: Request, res: Response, next: NextFunction) {
+
+    public async delete(req: Request, res: Response, next: NextFunction) {
         const pizzaId: number = +(req.params.id);
 
         if (pizzaId <= 0) {
