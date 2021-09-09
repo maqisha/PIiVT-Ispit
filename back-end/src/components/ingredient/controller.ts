@@ -1,19 +1,15 @@
 import { Request, Response, NextFunction } from "express";
+import IApplicationResources from "../../common/IApplicationResources.interface";
 import IErrorResponse from "../../common/IErrorResponse.interface";
+import BaseController from "../../common/BaseController";
 import { IAddIngredient, IAddIngredientValidator } from "./dto/AddIngredient";
 import { IEditIngredient, IEditIngredientValidator } from "./dto/EditIngredient";
 import IngredientModel from "./model";
 import IngredientService from "./service";
 
-export default class IngredientController {
-    private ingredientService: IngredientService;
-
-    constructor(ingredientService: IngredientService) {
-        this.ingredientService = ingredientService
-    }
-
+export default class IngredientController extends BaseController {
     async getAll(req: Request, res: Response, next: NextFunction) {
-        const data: IngredientModel[] | null | IErrorResponse = await this.ingredientService.getAll();
+        const data: IngredientModel[] | null | IErrorResponse = await this.services.ingredientService.getAll();
 
         if (data === null) {
             res.sendStatus(404);
@@ -36,7 +32,7 @@ export default class IngredientController {
             return;
         }
 
-        const data: IngredientModel | null | IErrorResponse = await this.ingredientService.getById(ingredientId, {});
+        const data: IngredientModel | null | IErrorResponse = await this.services.ingredientService.getById(ingredientId, {});
 
         if (data === null) {
             res.sendStatus(404);
@@ -59,7 +55,7 @@ export default class IngredientController {
             return;
         }
 
-        const result: IngredientModel | IErrorResponse = await this.ingredientService.add(data as IAddIngredient);
+        const result: IngredientModel | IErrorResponse = await this.services.ingredientService.add(data as IAddIngredient);
 
         res.send(result);
     }
@@ -78,7 +74,7 @@ export default class IngredientController {
             return;
         }
 
-        const result: IngredientModel | null | IErrorResponse = await this.ingredientService.edit(data as IEditIngredient, ingredientId);
+        const result: IngredientModel | null | IErrorResponse = await this.services.ingredientService.edit(data as IEditIngredient, ingredientId);
 
         if (result === null) {
             res.sendStatus(404);
@@ -96,6 +92,6 @@ export default class IngredientController {
             return;
         }
 
-        res.send(await this.ingredientService.delete(ingredientId));
+        res.send(await this.services.ingredientService.delete(ingredientId));
     }
 }

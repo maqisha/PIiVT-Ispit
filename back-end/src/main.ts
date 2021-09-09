@@ -6,6 +6,8 @@ import * as mysql2 from "mysql2/promise";
 import IApplicationResources from "./common/IApplicationResources.interface";
 import Router from "./router";
 import IngredientRouter from "./components/ingredient/router";
+import PizzaService from "./components/pizza/service";
+import IngredientService from "./components/ingredient/service";
 
 async function main() {
     const app: express.Application = express();
@@ -26,8 +28,12 @@ async function main() {
         }),
     }
 
-
     resources.conn.connect();
+
+    resources.services = {
+        pizzaService: new PizzaService(resources),
+        ingredientService: new IngredientService(resources),
+    }
 
     app.use(
         CFG.server.static.route,
@@ -48,7 +54,7 @@ async function main() {
         res.sendStatus(404);
     });
 
-    app.use((err, req, res, next)=>{
+    app.use((err, req, res, next) => {
         res.status(err.status).send(err.type);
     });
 

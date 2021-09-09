@@ -1,17 +1,23 @@
-import IModel from "../common/IModel.interface";
-import IAdaptModelOptions from "../common/IAdaptModelOptions.interface";
+import IModel from "./IModel.interface";
+import IAdaptModelOptions from "./IAdaptModelOptions.interface";
 import * as mysql2 from 'mysql2/promise';
-import IErrorResponse from "../common/IErrorResponse.interface";
+import IErrorResponse from "./IErrorResponse.interface";
+import IApplicationResources from "./IApplicationResources.interface";
+import IServices from "./IServices.interface";
 
 export default abstract class BaseService<T extends IModel> {
-    private conn: mysql2.Connection;
+    private resources: IApplicationResources;
 
-    constructor(conn: mysql2.Connection) {
-        this.conn = conn;
+    constructor(resources: IApplicationResources) {
+        this.resources = resources;
     }
 
     protected get db(): mysql2.Connection {
-        return this.conn;
+        return this.resources.conn;
+    }
+
+    protected get services(): IServices {
+        return this.resources.services;
     }
 
     protected abstract adaptModel(
@@ -22,7 +28,7 @@ export default abstract class BaseService<T extends IModel> {
     protected async getAllFromTable<AdapterOptions extends IAdaptModelOptions>(tableName: string, options: Partial<AdapterOptions> = {}): Promise<T[] | null | IErrorResponse> {
         return new Promise<T[] | null | IErrorResponse>(async resolve => {
             const sql: string = `SELECT * FROM ${tableName};`;
-            this.conn.execute(sql)
+            this.resources.conn.execute(sql)
                 .then(async result => {
                     const [rows, columns] = result;
                     const list: T[] = [];
@@ -47,7 +53,7 @@ export default abstract class BaseService<T extends IModel> {
     protected async getByIdFromTable<AdapterOptions extends IAdaptModelOptions>(tableName: string, id: number, options: Partial<AdapterOptions> = {}): Promise<T | null | IErrorResponse> {
         return new Promise<T | null | IErrorResponse>(async resolve => {
             const sql: string = `SELECT * FROM ${tableName} WHERE ${tableName}_id = ?;`;
-            this.conn.execute(sql, [id])
+            this.resources.conn.execute(sql, [id])
                 .then(async result => {
                     const [rows, columns] = result;
 

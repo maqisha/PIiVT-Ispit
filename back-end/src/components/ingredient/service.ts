@@ -1,7 +1,7 @@
 import IAdaptModelOptions from "../../common/IAdaptModelOptions.interface";
 import IAdaptModelOptionsInterface from "../../common/IAdaptModelOptions.interface";
 import IErrorResponse from "../../common/IErrorResponse.interface";
-import BaseService from "../../services/BaseService";
+import BaseService from "../../common/BaseService";
 import { IAddIngredient } from "./dto/AddIngredient";
 import IngredientModel from "./model";
 

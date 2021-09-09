@@ -2,12 +2,10 @@ import * as express from "express";
 import IApplicationResources from "../../common/IApplicationResources.interface";
 import IRouter from "../../common/IRouter.interface";
 import IngredientController from "./controller";
-import IngredientService from "./service";
 
 export default class IngredientRouter implements IRouter {
     public setupRoutes(app: express.Application, resources: IApplicationResources) {
-        const ingredientService: IngredientService = new IngredientService(resources.conn);
-        const ingredientController: IngredientController = new IngredientController(ingredientService);
+        const ingredientController: IngredientController = new IngredientController(resources);
 
         app.get("/ingredient", ingredientController.getAll.bind(ingredientController));
         app.get("/ingredient/:id", ingredientController.getById.bind(ingredientController));

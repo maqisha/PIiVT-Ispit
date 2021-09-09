@@ -1,26 +1,15 @@
 import IAdaptModelOptions from "../../common/IAdaptModelOptions.interface";
 import IErrorResponse from "../../common/IErrorResponse.interface";
-import BaseService from "../../services/BaseService";
+import BaseService from "../../common/BaseService";
 import { IAddPizza } from "./dto/AddPizza";
 import { IEditPizza } from "./dto/EditPizza";
 import PizzaModel from "./model";
-import * as mysql2 from "mysql2/promise";
-import IngredientService from "../ingredient/service";
 
 class PizzaModelAdapterOptions implements IAdaptModelOptions {
     loadIngredients: boolean = false;
 }
 
 export default class PizzaService extends BaseService<PizzaModel>{
-    // private ingredientService: IngredientService;
-    
-    // constructor(db: mysql2.Connection) {
-    //     super(db);
-
-    //     this.ingredientService = new IngredientService(this.db);
-    // }
-
-
     protected async adaptModel(row: any, options: Partial<PizzaModelAdapterOptions> = {}): Promise<PizzaModel> {
         const pizza: PizzaModel = new PizzaModel();
 

@@ -1,19 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import IErrorResponse from "../../common/IErrorResponse.interface";
+import BaseController from "../../common/BaseController";
 import { IAddPizzaValidator, IAddPizza } from "./dto/AddPizza";
 import { IEditPizzaValidator, IEditPizza } from "./dto/EditPizza";
 import PizzaModel from "./model";
 import PizzaService from "./service";
 
-export default class PizzaController {
-    private pizzaService: PizzaService;
-
-    constructor(pizzaService: PizzaService) {
-        this.pizzaService = pizzaService;
-    }
-
+export default class PizzaController extends BaseController {
     public async getAll(req: Request, res: Response, next: NextFunction) {
-        const data: PizzaModel[] | null | IErrorResponse = await this.pizzaService.getAll();
+        const data: PizzaModel[] | null | IErrorResponse = await this.services.pizzaService.getAll();
 
         if (data === null) {
             res.sendStatus(404);
@@ -35,7 +30,7 @@ export default class PizzaController {
             res.status(400).send("Invalid ID number.");
             return;
         }
-        const data: PizzaModel | null | IErrorResponse = await this.pizzaService.getById(pizzaId);
+        const data: PizzaModel | null | IErrorResponse = await this.services.pizzaService.getById(pizzaId);
 
         if (data === null) {
             res.sendStatus(404);
@@ -58,7 +53,7 @@ export default class PizzaController {
             return;
         }
 
-        const result: PizzaModel | IErrorResponse = await this.pizzaService.add(data as IAddPizza);
+        const result: PizzaModel | IErrorResponse = await this.services.pizzaService.add(data as IAddPizza);
 
         res.send(result);
     }
@@ -78,7 +73,7 @@ export default class PizzaController {
             return;
         }
 
-        const result: PizzaModel | null | IErrorResponse = await this.pizzaService.edit(data as IEditPizza, pizzaId);
+        const result: PizzaModel | null | IErrorResponse = await this.services.pizzaService.edit(data as IEditPizza, pizzaId);
 
         if (result === null) {
             res.sendStatus(404);
@@ -96,6 +91,6 @@ export default class PizzaController {
             return;
         }
 
-        res.send(await this.pizzaService.delete(pizzaId));
+        res.send(await this.services.pizzaService.delete(pizzaId));
     }
 }
