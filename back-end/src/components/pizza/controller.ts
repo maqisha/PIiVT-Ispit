@@ -15,38 +15,20 @@ export default class PizzaController extends BaseController {
     public async getAll(req: Request, res: Response, next: NextFunction) {
         const data: PizzaModel[] | null | IErrorResponse = await this.services.pizzaService.getAll({ loadIngredients: true });
 
-        if (data === null) {
-            res.sendStatus(404);
-            return;
-        }
-
-        if (Array.isArray(data)) {
-            res.send(data);
-            return;
-        }
-
+        if (data === null) return res.sendStatus(404);
+        if (Array.isArray(data)) return res.send(data);
         res.status(500).send(data);
     }
 
     public async getById(req: Request, res: Response, next: NextFunction) {
         const pizzaId: number = +req.params.id;
 
-        if (pizzaId <= 0) {
-            res.status(400).send("Invalid ID number.");
-            return;
-        }
+        if (pizzaId <= 0) return res.status(400).send("Invalid ID number.");
+
         const data: PizzaModel | null | IErrorResponse = await this.services.pizzaService.getById(pizzaId, { loadIngredients: true });
 
-        if (data === null) {
-            res.sendStatus(404);
-            return;
-        }
-
-        if (data instanceof PizzaModel) {
-            res.send(data);
-            return;
-        }
-
+        if (data === null) return res.sendStatus(404);
+        if (data instanceof PizzaModel) return res.send(data);
         res.status(500).send(data);
     }
 
@@ -54,32 +36,24 @@ export default class PizzaController extends BaseController {
         const size = sizeOf(file.tempFilePath);
         const limits = CFG.fileupload.photos.limits
 
-        if (size.width < limits.minWidth) {
-            return {
-                isOk: false,
-                message: `The image must have a width of at least ${limits.minWidth}px`
-            }
+        if (size.width < limits.minWidth) return {
+            isOk: false,
+            message: `The image must have a width of at least ${limits.minWidth}px`
         }
 
-        if (size.width > limits.maxWidth) {
-            return {
-                isOk: false,
-                message: `The image must have a width less than ${limits.maxWidth}px`
-            }
+        if (size.width > limits.maxWidth) return {
+            isOk: false,
+            message: `The image must have a width less than ${limits.maxWidth}px`
         }
 
-        if (size.height < limits.minHeight) {
-            return {
-                isOk: false,
-                message: `The image must have a height of at least ${limits.minHeight}px`
-            }
+        if (size.height < limits.minHeight) return {
+            isOk: false,
+            message: `The image must have a height of at least ${limits.minHeight}px`
         }
 
-        if (size.height > limits.maxHeight) {
-            return {
-                isOk: false,
-                message: `The image must have a height less than ${limits.maxHeight}px`
-            }
+        if (size.height > limits.maxHeight) return {
+            isOk: false,
+            message: `The image must have a height less than ${limits.maxHeight}px`
         }
 
         return {
@@ -138,18 +112,13 @@ export default class PizzaController extends BaseController {
 
     public async add(req: Request, res: Response, next: NextFunction) {
         const imagePath = await this.uploadFile(req, res);
-        if (!imagePath) {
-            return;
-        }
+        if (!imagePath) return;
 
         try {
             const data = JSON.parse(req.body?.data);
             data.imagePath = imagePath;
 
-            if (!IAddPizzaValidator(data)) {
-                res.status(400).send(IAddPizzaValidator.errors);
-                return;
-            }
+            if (!IAddPizzaValidator(data)) return res.status(400).send(IAddPizzaValidator.errors);
 
             const result: PizzaModel | IErrorResponse = await this.services.pizzaService.add(data as IAddPizza);
 
@@ -162,29 +131,19 @@ export default class PizzaController extends BaseController {
     public async edit(req: Request, res: Response, next: NextFunction) {
         const pizzaId: number = +(req.params.id);
 
-        if (pizzaId <= 0) {
-            res.status(400).send("Invalid ID number.");
-            return;
-        }
-        
+        if (pizzaId <= 0) return res.status(400).send("Invalid ID number.");
+
         try {
             const data = JSON.parse(req.body?.data);
             if (req.files && Object.keys(req.files).length > 0) {
-                data.imagePath =  await this.uploadFile(req, res);
+                data.imagePath = await this.uploadFile(req, res);
             }
 
-            if (!IEditPizzaValidator(data)) {
-                res.status(400).send(IEditPizzaValidator.errors);
-                return;
-            }
+            if (!IEditPizzaValidator(data)) return res.status(400).send(IEditPizzaValidator.errors);
 
             const result: PizzaModel | null | IErrorResponse = await this.services.pizzaService.edit(data as IEditPizza, pizzaId);
 
-            if (result === null) {
-                res.sendStatus(404);
-                return;
-            }
-
+            if (result === null) return res.sendStatus(404);
             res.send(result);
         } catch (err) {
             res.send(400).send(err?.message);
@@ -193,12 +152,7 @@ export default class PizzaController extends BaseController {
 
     public async delete(req: Request, res: Response, next: NextFunction) {
         const pizzaId: number = +(req.params.id);
-
-        if (pizzaId <= 0) {
-            res.status(400).send("Invalid ID number.");
-            return;
-        }
-
+        if (pizzaId <= 0) return res.status(400).send("Invalid ID number.");
         res.send(await this.services.pizzaService.delete(pizzaId));
     }
 }

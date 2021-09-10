@@ -3,6 +3,7 @@ import IErrorResponse from "../../common/IErrorResponse.interface";
 import BaseService from "../../common/BaseService";
 import { IAddIngredient } from "./dto/AddIngredient";
 import IngredientModel from "./model";
+import { IEditIngredient } from "./dto/EditIngredient";
 
 class IngredientModelAdapterOptions implements IAdaptModelOptions {
 
@@ -80,14 +81,11 @@ class IngredientService extends BaseService<IngredientModel> {
         })
     }
 
-    public async edit(newIngredient: IAddIngredient, ingredientId: number): Promise<IngredientModel | null | IErrorResponse> {
+    public async edit(newIngredient: IEditIngredient, ingredientId: number): Promise<IngredientModel | null | IErrorResponse> {
         return new Promise<IngredientModel | null | IErrorResponse>(async resolve => {
             const oldIngredient = await this.getById(ingredientId);
 
-            if (oldIngredient === null) {
-                resolve(null);
-                return null;
-            }
+            if (oldIngredient === null) return resolve(null);
 
             if (!(oldIngredient instanceof IngredientModel)) {
                 return oldIngredient;

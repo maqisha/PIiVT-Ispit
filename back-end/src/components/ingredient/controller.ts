@@ -7,18 +7,11 @@ import { IEditIngredient, IEditIngredientValidator } from "./dto/EditIngredient"
 import IngredientModel from "./model";
 
 export default class IngredientController extends BaseController {
-    async getAll(req: Request, res: Response, next: NextFunction) {
+    public async getAll(req: Request, res: Response, next: NextFunction) {
         const data: IngredientModel[] | null | IErrorResponse = await this.services.ingredientService.getAll();
 
-        if (data === null) {
-            res.sendStatus(404);
-            return;
-        }
-
-        if (Array.isArray(data)) {
-            res.send(data);
-            return;
-        }
+        if (data === null) return res.sendStatus(404);
+        if (Array.isArray(data)) return res.send(data);
 
         res.status(500).send(data);
     }
@@ -26,33 +19,19 @@ export default class IngredientController extends BaseController {
     public async getById(req: Request, res: Response, next: NextFunction) {
         const ingredientId: number = +(req.params.id);
 
-        if (ingredientId <= 0) {
-            res.status(400).send("Invalid ID number.");
-            return;
-        }
+        if (ingredientId <= 0) return res.status(400).send("Invalid ID number.");
 
         const data: IngredientModel | null | IErrorResponse = await this.services.ingredientService.getById(ingredientId, {});
 
-        if (data === null) {
-            res.sendStatus(404);
-            return;
-        }
-
-        if (data instanceof IngredientModel) {
-            res.send(data);
-            return;
-        }
-
+        if (data === null) return res.sendStatus(404);
+        if (data instanceof IngredientModel) return res.send(data);
         res.status(500).send(data);
     }
 
     public async add(req: Request, res: Response, next: NextFunction) {
         const data = req.body;
 
-        if (!IAddIngredientValidator(data)) {
-            res.status(400).send(IAddIngredientValidator.errors);
-            return;
-        }
+        if (!IAddIngredientValidator(data)) return res.status(400).send(IAddIngredientValidator.errors);
 
         const result: IngredientModel | IErrorResponse = await this.services.ingredientService.add(data as IAddIngredient);
 
@@ -63,34 +42,19 @@ export default class IngredientController extends BaseController {
         const data = req.body;
         const ingredientId = +(req.params.id);
 
-        if (ingredientId <= 0) {
-            res.status(400).send("Invalid ID number.");
-            return;
-        }
-
-        if (!IEditIngredientValidator(data)) {
-            res.status(400).send(IEditIngredientValidator.errors);
-            return;
-        }
+        if (ingredientId <= 0) return res.status(400).send("Invalid ID number.");
+        if (!IEditIngredientValidator(data)) return res.status(400).send(IEditIngredientValidator.errors);
 
         const result: IngredientModel | null | IErrorResponse = await this.services.ingredientService.edit(data as IEditIngredient, ingredientId);
 
-        if (result === null) {
-            res.sendStatus(404);
-            return;
-        }
-        
+        if (result === null) return res.sendStatus(404);
         res.send(result);
     }
 
     public async delete(req: Request, res: Response, next: NextFunction) {
         const ingredientId: number = +(req.params.id);
 
-        if (ingredientId <= 0) {
-            res.status(400).send("Invalid ID number.");
-            return;
-        }
-
+        if (ingredientId <= 0) return res.status(400).send("Invalid ID number.");
         res.send(await this.services.ingredientService.delete(ingredientId));
     }
 }
