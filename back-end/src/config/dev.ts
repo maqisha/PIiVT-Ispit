@@ -1,4 +1,8 @@
 import IConfig from "../common/IConfig.interface";
+import * as dotenv from "dotenv";
+
+const dotEnvResult = dotenv.config()
+if (dotEnvResult.error) throw "Environment configuration error: " + dotEnvResult.error;
 
 const CFG: IConfig = {
     server: {
@@ -14,11 +18,11 @@ const CFG: IConfig = {
         }
     },
     database: {
-        host: "localhost",
-        port: 3306,
-        user: "root",
-        password: "",
-        database: "pizzeria",
+        host: process.env?.DATABASE_HOST,
+        port: +(process.env?.DATABASE_PORT),
+        user: process.env?.DATABASE_USER,
+        password: process.env?.DATABASE_PASSWORD,
+        database: process.env?.DATABASE_NAME,
         charset: "utf8",
         timezone: "+01:00",
     },
@@ -51,6 +55,15 @@ const CFG: IConfig = {
             ]
         }
     },
+    mail: {
+        hostname: process.env?.MAIL_HOST,
+        port: +(process.env?.MAIL_PORT),
+        secure: process.env?.MAIL_SECURE === "true",
+        username: process.env?.MAIL_USERNAME,
+        password: process.env?.MAIL_PASSWORD,
+        fromMail: process.env?.MAIL_FROM,
+        debug: true,
+    }
 }
 
 export default CFG;
