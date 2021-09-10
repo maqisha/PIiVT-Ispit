@@ -57,18 +57,9 @@ export default class PizzaService extends BaseService<PizzaModel>{
                             Promise.all(promises)
                                 .then(async () => {
                                     await this.db.commit();
-                                    resolve(await this.getById(newPizzaId, {loadIngredients: true}));
+                                    resolve(await this.getById(newPizzaId, { loadIngredients: true }));
                                 })
                         })
-                        .catch(async error => {
-                            await this.db.rollback();
-
-                            resolve({
-                                errorCode: error?.errno,
-                                errorMessage: error?.sqlMessage,
-                            })
-                        });
-
                 })
                 .catch(async error => {
                     await this.db.rollback();
@@ -81,9 +72,9 @@ export default class PizzaService extends BaseService<PizzaModel>{
         })
     }
 
-    public async edit(newPizza: IEditPizza, pizzaId: number): Promise<PizzaModel | null | IErrorResponse> {
+    public async edit(data: IEditPizza, pizzaId: number): Promise<PizzaModel | null | IErrorResponse> {
         return new Promise<PizzaModel | null | IErrorResponse>(async resolve => {
-            const oldPizza = await this.getById(pizzaId);
+            const oldPizza = await this.getById(pizzaId, {loadIngredients: true});
 
             if (oldPizza === null) {
                 resolve(null);
@@ -94,18 +85,52 @@ export default class PizzaService extends BaseService<PizzaModel>{
                 return oldPizza;
             }
 
-            const sql = "UPDATE pizza SET name = ?, image_path = ?, price = ? WHERE pizza_id = ?;";
+            this.db.beginTransaction()
+                .then(() => {
+                    const imagePath = data.imagePath ? data.imagePath : oldPizza.imagePath;
+                    const sql = "UPDATE pizza SET name = ?, image_path = ?, price = ? WHERE pizza_id = ?;";                 
+                    this.db.execute(sql, [data.name, imagePath, data.price, pizzaId])
+                        .then(async (result: any) => {
+                            const promises = [];
 
-            this.db.execute(sql, [newPizza.name, newPizza.imagePath, newPizza.price, pizzaId])
-                .then(async result => {
-                    resolve(await this.getById(pizzaId, { loadIngredients: true }));
+                            const oldIngredientsIds = oldPizza.ingredients.map(e => e.ingredientId);
+                            for (const ingredientId of oldIngredientsIds) {
+                                if (!data.ingredientIds.includes(ingredientId)) {
+                                    promises.push(
+                                        this.db.execute(
+                                            'DELETE FROM pizza_ingredient WHERE pizza_id = ? AND ingredient_id = ?',
+                                            [pizzaId, ingredientId]
+                                        )
+                                    )
+                                }
+                            }
+
+                            for (const ingredientId of data.ingredientIds) {
+                                if (!oldIngredientsIds.includes(ingredientId)) {
+                                    promises.push(
+                                        this.db.execute(
+                                            'INSERT pizza_ingredient SET pizza_id = ?, ingredient_id = ?',
+                                            [pizzaId, ingredientId]
+                                        )
+                                    )
+                                }
+                            }
+
+                            Promise.all(promises)
+                                .then(async () => {
+                                    await this.db.commit();
+                                    resolve(await this.getById(pizzaId, { loadIngredients: true }));
+                                })
+                        })
                 })
-                .catch(error => {
+                .catch(async error => {
+                    await this.db.rollback();
+
                     resolve({
                         errorCode: error?.errno,
-                        errorMessage: error?.sqlMessage,
-                    })
-                });
+                        errorMessage: error?.sqlMessage
+                    });
+                })
         })
     }
 

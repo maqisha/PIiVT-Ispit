@@ -3,7 +3,8 @@ import * as Ajv from "ajv";
 interface IEditPizza {
     name: string,
     imagePath: string,
-    price: number
+    price: number,
+    ingredientIds: number[],
 }
 
 const ajv = Ajv();
@@ -16,20 +17,29 @@ const IEditPizzaValidator = ajv.compile({
             minLength: 2,
             maxLength: 50,
         },
+        price: {
+            type: "number",
+            minimum: 1
+        },
+        ingredientIds: {
+            type: "array",
+            minItems: 1,
+            uniqueItems: true,
+            items: {
+                type: "number",
+                minimum: 1,
+            }
+        },
         imagePath: {
             type: "string",
             maxLength: 255,
             pattern: "\.(png|jpg)$",
         },
-        price: {
-            type: "number",
-            minimum: 1
-        },
     },
     required: [
         "name",
-        "imagePath",
         "price",
+        "ingredientIds",
     ],
     additionalProperties: false,
 })

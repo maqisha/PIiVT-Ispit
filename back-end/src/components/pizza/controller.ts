@@ -157,7 +157,6 @@ export default class PizzaController extends BaseController {
         } catch (err) {
             res.send(400).send(err?.message);
         }
-
     }
 
     public async edit(req: Request, res: Response, next: NextFunction) {
@@ -167,22 +166,29 @@ export default class PizzaController extends BaseController {
             res.status(400).send("Invalid ID number.");
             return;
         }
+        
+        try {
+            const data = JSON.parse(req.body?.data);
+            if (req.files && Object.keys(req.files).length > 0) {
+                data.imagePath =  await this.uploadFile(req, res);
+            }
 
-        const data = req.body;
+            if (!IEditPizzaValidator(data)) {
+                res.status(400).send(IEditPizzaValidator.errors);
+                return;
+            }
 
-        if (!IEditPizzaValidator(data)) {
-            res.status(400).send(IEditPizzaValidator.errors);
-            return;
+            const result: PizzaModel | null | IErrorResponse = await this.services.pizzaService.edit(data as IEditPizza, pizzaId);
+
+            if (result === null) {
+                res.sendStatus(404);
+                return;
+            }
+
+            res.send(result);
+        } catch (err) {
+            res.send(400).send(err?.message);
         }
-
-        const result: PizzaModel | null | IErrorResponse = await this.services.pizzaService.edit(data as IEditPizza, pizzaId);
-
-        if (result === null) {
-            res.sendStatus(404);
-            return;
-        }
-
-        res.send(result);
     }
 
     public async delete(req: Request, res: Response, next: NextFunction) {
