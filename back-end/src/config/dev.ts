@@ -27,7 +27,29 @@ const CFG: IConfig = {
         maxFiles: 1,
         timeout: 30000,
         tempDir: '../temp/',
-        uploadDir: 'static/uploads/'
+        uploadDir: 'static/uploads/',
+        photos: {
+            limits: {
+                minWidth: 300,
+                minHeight: 200,
+                maxWidth: 1920,
+                maxHeight: 1080,
+            },
+            resizes: [
+                {
+                    sufix: '-small',
+                    fit: 'cover',
+                    width: 400,
+                    height: 300,
+                },
+                {
+                    sufix: '-medium',
+                    fit: 'cover',
+                    width: 800,
+                    height: 600,
+                }
+            ]
+        }
     },
 }
 

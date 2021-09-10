@@ -57,7 +57,7 @@ export default class PizzaService extends BaseService<PizzaModel>{
                             Promise.all(promises)
                                 .then(async () => {
                                     await this.db.commit();
-                                    resolve(await this.getById(newPizzaId));
+                                    resolve(await this.getById(newPizzaId, {loadIngredients: true}));
                                 })
                         })
                         .catch(async error => {

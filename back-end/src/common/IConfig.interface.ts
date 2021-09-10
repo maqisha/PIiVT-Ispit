@@ -25,6 +25,20 @@ export default interface IConfig {
         maxFiles: number,
         timeout: number,
         tempDir: string,
-        uploadDir: string
+        uploadDir: string,
+        photos: {
+            limits: {
+                minWidth: number,
+                maxWidth: number,
+                minHeight: number,
+                maxHeight: number,
+            },
+            resizes: {
+                sufix: string,
+                width: number,
+                height: number,
+                fit: "cover"|"contain",
+            }[]
+        },
     },
 };
