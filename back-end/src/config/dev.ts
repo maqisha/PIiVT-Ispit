@@ -21,7 +21,14 @@ const CFG: IConfig = {
         database: "pizzeria",
         charset: "utf8",
         timezone: "+01:00",
-    }
+    },
+    fileupload: {
+        maxSize: 5 * 1024 * 1024,
+        maxFiles: 1,
+        timeout: 30000,
+        tempDir: '../temp/',
+        uploadDir: 'static/uploads/'
+    },
 }
 
 export default CFG;

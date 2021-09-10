@@ -4,11 +4,12 @@ import BaseController from "../../common/BaseController";
 import { IAddPizzaValidator, IAddPizza } from "./dto/AddPizza";
 import { IEditPizzaValidator, IEditPizza } from "./dto/EditPizza";
 import PizzaModel from "./model";
-import PizzaService from "./service";
+import CFG from "../../config/dev";
+import { v4 as uuid } from 'uuid';
 
 export default class PizzaController extends BaseController {
     public async getAll(req: Request, res: Response, next: NextFunction) {
-        const data: PizzaModel[] | null | IErrorResponse = await this.services.pizzaService.getAll();
+        const data: PizzaModel[] | null | IErrorResponse = await this.services.pizzaService.getAll({ loadIngredients: true });
 
         if (data === null) {
             res.sendStatus(404);
@@ -30,7 +31,7 @@ export default class PizzaController extends BaseController {
             res.status(400).send("Invalid ID number.");
             return;
         }
-        const data: PizzaModel | null | IErrorResponse = await this.services.pizzaService.getById(pizzaId);
+        const data: PizzaModel | null | IErrorResponse = await this.services.pizzaService.getById(pizzaId, { loadIngredients: true });
 
         if (data === null) {
             res.sendStatus(404);
@@ -46,7 +47,23 @@ export default class PizzaController extends BaseController {
     }
 
     public async add(req: Request, res: Response, next: NextFunction) {
-        const data = req.body;
+        if (!req.files || Object.keys(req.files).length === 0) {
+            res.status(400).send("You must upload a photo!");
+        }
+
+        const file = req.files[Object.keys(req.files)[0]] as any;
+        const date = new Date();
+        const imagePath =
+            CFG.fileupload.uploadDir +
+            date.getFullYear() + "/" +
+            ((date.getMonth() + 1) + "").padStart(2, "0") + "/" +
+            uuid() + "-" + file?.name;
+
+        await file.mv(imagePath)
+
+
+        const data = JSON.parse(req.body?.data);
+        data.imagePath = imagePath;
 
         if (!IAddPizzaValidator(data)) {
             res.status(400).send(IAddPizzaValidator.errors);

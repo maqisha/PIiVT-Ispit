@@ -4,6 +4,7 @@ import BaseService from "../../common/BaseService";
 import { IAddPizza } from "./dto/AddPizza";
 import { IEditPizza } from "./dto/EditPizza";
 import PizzaModel from "./model";
+import IngredientModel from "../ingredient/model";
 
 class PizzaModelAdapterOptions implements IAdaptModelOptions {
     loadIngredients: boolean = false;
@@ -19,10 +20,9 @@ export default class PizzaService extends BaseService<PizzaModel>{
         pizza.price = +(row?.price);
         pizza.isActive = !!(row?.is_active);
 
-
-        // if (options.loadIngredients) {
-        //     pizza.ingredients = [];
-        // }
+        if (options.loadIngredients) {
+            pizza.ingredients = await this.services.ingredientService.getAllByPizzaId(pizza.pizzaId) as IngredientModel[];
+        }
 
         return pizza;
     }
@@ -37,20 +37,47 @@ export default class PizzaService extends BaseService<PizzaModel>{
 
     public async add(data: IAddPizza): Promise<PizzaModel | IErrorResponse> {
         return new Promise<PizzaModel | IErrorResponse>(async resolve => {
-            const sql = "INSERT pizza SET name = ?, image_path = ?, price = ?;";
+            this.db.beginTransaction()
+                .then(() => {
+                    const sql = "INSERT pizza SET name = ?, image_path = ?, price = ?;";
+                    this.db.execute(sql, [data.name, data.imagePath, data.price])
+                        .then(async (result: any) => {
+                            const newPizzaId: number = +(result[0]?.insertId);
+                            const promises = [];
 
-            this.db.execute(sql, [data.name, data.imagePath, data.price])
-                .then(async result => {
-                    const insertInfo: any = result[0];
-                    const newPizzaId: number = +(insertInfo?.insertId);
-                    resolve(await this.getById(newPizzaId));
+                            for (const ingredientId of data.ingredientIds) {
+                                promises.push(
+                                    this.db.execute(
+                                        'INSERT pizza_ingredient SET pizza_id = ?, ingredient_id = ?',
+                                        [newPizzaId, ingredientId]
+                                    )
+                                )
+                            }
+
+                            Promise.all(promises)
+                                .then(async () => {
+                                    await this.db.commit();
+                                    resolve(await this.getById(newPizzaId));
+                                })
+                        })
+                        .catch(async error => {
+                            await this.db.rollback();
+
+                            resolve({
+                                errorCode: error?.errno,
+                                errorMessage: error?.sqlMessage,
+                            })
+                        });
+
                 })
-                .catch(error => {
+                .catch(async error => {
+                    await this.db.rollback();
+
                     resolve({
                         errorCode: error?.errno,
-                        errorMessage: error?.sqlMessage,
-                    })
-                });
+                        errorMessage: error?.sqlMessage
+                    });
+                })
         })
     }
 

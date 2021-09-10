@@ -8,12 +8,26 @@ import Router from "./router";
 import IngredientRouter from "./components/ingredient/router";
 import PizzaService from "./components/pizza/service";
 import IngredientService from "./components/ingredient/service";
+import * as fileUpload from "express-fileupload";
 
 async function main() {
     const app: express.Application = express();
 
     app.use(cors());
     app.use(express.json());
+    app.use(fileUpload({
+        limits: {
+            fileSize: CFG.fileupload.maxSize,
+            files: CFG.fileupload.maxFiles
+        },
+        useTempFiles: true,
+        tempFileDir: CFG.fileupload.tempDir,
+        uploadTimeout: CFG.fileupload.timeout,
+        safeFileNames: true,
+        preserveExtension: true,
+        createParentPath: true,
+        abortOnLimit: true,
+    }));
 
     const resources: IApplicationResources = {
         conn: await mysql2.createConnection({

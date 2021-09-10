@@ -1,9 +1,11 @@
 import * as Ajv from "ajv";
+import IngredientModel from "../../ingredient/model";
 
 interface IAddPizza {
     name: string,
     imagePath: string,
-    price: number
+    price: number,
+    ingredientIds: number[],
 }
 
 const ajv = Ajv();
@@ -23,13 +25,24 @@ const IAddPizzaValidator = ajv.compile({
         },
         price: {
             type: "number",
-            minimum: 1
+            minimum: 1,
         },
+        ingredientIds: {
+            type: "array",
+            minItems: 1,
+            uniqueItems: true,
+            items: {
+                type: "number",
+                minimum: 1,
+            }
+
+        }
     },
     required: [
         "name",
         "imagePath",
         "price",
+        "ingredientIds",
     ],
     additionalProperties: false,
 })

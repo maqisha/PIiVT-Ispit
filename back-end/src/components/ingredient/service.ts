@@ -1,5 +1,4 @@
 import IAdaptModelOptions from "../../common/IAdaptModelOptions.interface";
-import IAdaptModelOptionsInterface from "../../common/IAdaptModelOptions.interface";
 import IErrorResponse from "../../common/IErrorResponse.interface";
 import BaseService from "../../common/BaseService";
 import { IAddIngredient } from "./dto/AddIngredient";
@@ -26,6 +25,40 @@ class IngredientService extends BaseService<IngredientModel> {
 
     public async getAll(options: Partial<IngredientModelAdapterOptions> = {}): Promise<IngredientModel[] | null | IErrorResponse> {
         return await this.getAllFromTable("ingredient", options);
+    }
+
+    public async getAllByPizzaId(pizzaId: number, options: Partial<IngredientModelAdapterOptions> = {}): Promise<IngredientModel[] | null | IErrorResponse> {
+        return new Promise<IngredientModel[] | null | IErrorResponse>(async resolve => {
+            const sql: string = `
+                SELECT
+                    ingredient.ingredient_id,
+                    ingredient.name,
+                    ingredient.price
+                FROM
+                    pizza_ingredient
+                INNER JOIN ingredient 
+                ON pizza_ingredient.ingredient_id = ingredient.ingredient_id
+                WHERE pizza_ingredient.pizza_id = ?`;
+            this.db.execute(sql, [pizzaId])
+                .then(async result => {
+                    const [rows, columns] = result;
+                    const list: IngredientModel[] = [];
+
+                    if (Array.isArray(rows)) {
+                        for (const row of rows) {
+                            list.push(await this.adaptModel(row, options));
+                        };
+                    }
+
+                    resolve(list);
+                })
+                .catch(error => {
+                    resolve({
+                        errorCode: error?.errno,
+                        errorMessage: error?.sqlMessage,
+                    });
+                });
+        });
     }
 
     public async add(data: IAddIngredient): Promise<IngredientModel | IErrorResponse> {

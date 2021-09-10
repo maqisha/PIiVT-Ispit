@@ -5,7 +5,6 @@ import BaseController from "../../common/BaseController";
 import { IAddIngredient, IAddIngredientValidator } from "./dto/AddIngredient";
 import { IEditIngredient, IEditIngredientValidator } from "./dto/EditIngredient";
 import IngredientModel from "./model";
-import IngredientService from "./service";
 
 export default class IngredientController extends BaseController {
     async getAll(req: Request, res: Response, next: NextFunction) {
