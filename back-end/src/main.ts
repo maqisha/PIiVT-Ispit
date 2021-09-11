@@ -11,6 +11,7 @@ import IngredientService from "./components/ingredient/service";
 import * as fileUpload from "express-fileupload";
 import UserService from "./components/user/service";
 import UserRouter from "./components/user/router";
+import AuthRouter from "./components/auth/router";
 
 async function main() {
     const app: express.Application = express();
@@ -66,6 +67,7 @@ async function main() {
         new PizzaRouter(),
         new IngredientRouter(),
         new UserRouter(),
+        new AuthRouter(),
     ]);
 
     app.use((req, res) => {

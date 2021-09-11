@@ -1,3 +1,18 @@
+import { Algorithm } from "jsonwebtoken";
+
+interface TokenKeyOptions {
+    private: string;
+    public: string;
+    duration: number;
+}
+
+interface TokenOptions {
+    auth: TokenKeyOptions,
+    refresh: TokenKeyOptions,
+    issuer: string;
+    algorithm: Algorithm,
+}
+
 export default interface IConfig {
     server: {
         port: number,
@@ -37,7 +52,7 @@ export default interface IConfig {
                 sufix: string,
                 width: number,
                 height: number,
-                fit: "cover"|"contain",
+                fit: "cover" | "contain",
             }[]
         },
     },
@@ -49,5 +64,10 @@ export default interface IConfig {
         password: string,
         fromMail: string,
         debug: boolean,
-    }
+    },
+    auth: {
+        user: TokenOptions,
+        administrator: TokenOptions,
+        allowRequestsEvenWithoutValidTokens: boolean,
+    },
 };

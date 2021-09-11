@@ -73,4 +73,41 @@ export default abstract class BaseService<T extends IModel> {
 
         });
     }
+
+    protected async getAllByFieldNameFromTable<AdapterOptions extends IAdaptModelOptions>(
+        tableName: string,
+        fieldName: string,
+        fieldValue: any,
+        options: Partial<AdapterOptions> = {}
+    ): Promise<T[] | IErrorResponse> {
+        return new Promise<T[] | IErrorResponse>(async (resolve) => {
+            let sql = `SELECT * FROM ${tableName} WHERE ${fieldName} = ?;`;
+
+            if (fieldValue === null) {
+                sql = `SELECT * FROM ${tableName} WHERE ${fieldName} IS NULL;`;
+            }
+
+            this.db.execute(sql, [fieldValue])
+                .then(async result => {
+                    const rows = result[0];
+                    const lista: T[] = [];
+
+                    if (Array.isArray(rows)) {
+                        for (const row of rows) {
+                            lista.push(
+                                await this.adaptModel(row, options)
+                            )
+                        }
+                    }
+
+                    resolve(lista);
+                })
+                .catch(error => {
+                    resolve({
+                        errorCode: error?.errno,
+                        errorMessage: error?.sqlMessage
+                    });
+                });
+        });
+    }
 }
