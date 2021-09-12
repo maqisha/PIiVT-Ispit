@@ -21,9 +21,15 @@ export default class AuthMiddleware {
             return res.status(400).send("Invalid auth token data!");
         }
 
+
         let result;
         try {
-            result = jwt.verify(tokenString, CFG.auth.user.auth.public);
+            if (allowedRoles.includes("administrator")) {
+                result = jwt.verify(tokenString, CFG.auth.administrator.auth.public);
+                if (typeof result !== "object")
+                    result = jwt.verify(tokenString, CFG.auth.user.auth.public);
+            } else
+                result = jwt.verify(tokenString, CFG.auth.user.auth.public);
         } catch (e) {
             return res.status(500).send("Status validation error " + e?.message);
         }

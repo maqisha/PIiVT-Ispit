@@ -12,6 +12,8 @@ import * as fileUpload from "express-fileupload";
 import UserService from "./components/user/service";
 import UserRouter from "./components/user/router";
 import AuthRouter from "./components/auth/router";
+import OrderRouter from "./components/order/router";
+import OrderService from "./components/order/service";
 
 async function main() {
     const app: express.Application = express();
@@ -51,6 +53,7 @@ async function main() {
         pizzaService: new PizzaService(resources),
         ingredientService: new IngredientService(resources),
         userService: new UserService(resources),
+        orderService: new OrderService(resources),
     }
 
     app.use(
@@ -68,6 +71,7 @@ async function main() {
         new IngredientRouter(),
         new UserRouter(),
         new AuthRouter(),
+        new OrderRouter(),
     ]);
 
     app.use((req, res) => {

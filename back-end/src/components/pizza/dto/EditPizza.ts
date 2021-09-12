@@ -26,7 +26,7 @@ const IEditPizzaValidator = ajv.compile({
             minItems: 1,
             uniqueItems: true,
             items: {
-                type: "number",
+                type: "integer",
                 minimum: 1,
             }
         },

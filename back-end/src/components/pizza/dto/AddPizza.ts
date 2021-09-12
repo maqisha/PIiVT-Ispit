@@ -35,7 +35,6 @@ const IAddPizzaValidator = ajv.compile({
                 type: "number",
                 minimum: 1,
             }
-
         }
     },
     required: [

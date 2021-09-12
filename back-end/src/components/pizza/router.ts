@@ -9,9 +9,9 @@ export default class PizzaRouter implements IRouter {
         const pizzaController: PizzaController = new PizzaController(resources);
 
         app.get("/pizza", AuthMiddleware.getVerifier('administrator', 'user'), pizzaController.getAll.bind(pizzaController));
-        app.get("/pizza/:id", pizzaController.getById.bind(pizzaController));
-        app.post("/pizza", pizzaController.add.bind(pizzaController));
-        app.put("/pizza/:id", pizzaController.edit.bind(pizzaController));
-        app.delete("/pizza/:id", pizzaController.delete.bind(pizzaController));
+        app.get("/pizza/:id", AuthMiddleware.getVerifier('administrator', 'user'), pizzaController.getById.bind(pizzaController));
+        app.post("/pizza", AuthMiddleware.getVerifier('administrator'), pizzaController.add.bind(pizzaController));
+        app.put("/pizza/:id", AuthMiddleware.getVerifier('administrator'), pizzaController.edit.bind(pizzaController));
+        app.delete("/pizza/:id", AuthMiddleware.getVerifier('administrator'), pizzaController.delete.bind(pizzaController));
     }
 }
