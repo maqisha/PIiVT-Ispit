@@ -18,7 +18,10 @@ import OrderService from "./components/order/service";
 async function main() {
     const app: express.Application = express();
 
-    app.use(cors());
+    app.use(cors({
+        origin: "http://localhost:3000",
+        credential: true
+    }));
     app.use(express.json());
     app.use(fileUpload({
         limits: {
