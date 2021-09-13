@@ -90,10 +90,7 @@ export default class UserController extends BaseController {
     public async register(req: Request, res: Response, next: NextFunction) {
         const data = req.body;
 
-        if (!IAddUserValidator(data)) {
-            res.status(400).send(IAddUserValidator.errors);
-            return;
-        }
+        if (!IAddUserValidator(data)) return res.status(400).send(IAddUserValidator.errors);
 
         const result: UserModel | IErrorResponse = await this.services.userService.add(data as IAddUser);
 
@@ -105,9 +102,9 @@ export default class UserController extends BaseController {
             return res.status(400).send(result);
         }
 
-        if ((await this.sendRegistrationEmail(result)).errorCode !== 0) {
-            // error
-        }
+        // if ((await this.sendRegistrationEmail(result)).errorCode !== 0) {
+        //     // error
+        // }
 
         res.send(result);
     }
@@ -148,7 +145,7 @@ export default class UserController extends BaseController {
                 })
                 .catch(error => {
                     transport.close();
-                    
+
                     resolve({
                         errorCode: -1,
                         errorMessage: error.message,

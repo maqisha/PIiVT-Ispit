@@ -8,7 +8,6 @@ type UserRole = "user" | "administrator";
 export default class AuthMiddleware {
     private static veryfyAuthToken(req: Request, res: Response, next: NextFunction, allowedRoles: UserRole[]) {
         // return next();
-
         if (typeof req.headers.authorization !== "string") {
             return res.status(401).send("You are not authorized for this action");
         }
@@ -36,6 +35,7 @@ export default class AuthMiddleware {
             return res.status(401).send("Token validation error " + e?.message);
         }
 
+        
         if (typeof result !== "object") {
             return res.status(401).send("Invalid auth token data!");
         }
@@ -47,7 +47,6 @@ export default class AuthMiddleware {
         }
 
         req.authorized = data;
-
         next();
     }
 

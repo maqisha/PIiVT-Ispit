@@ -7,6 +7,7 @@ export default class PizzaService {
             api(
                 "get",
                 "/pizza",
+                'user'
             )
                 .then(result => {
                     if(result?.status !== "ok") {

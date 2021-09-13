@@ -9,6 +9,14 @@ import CFG from "../../config/dev";
 import { IRefreshToken, IRefreshTokenValidator } from "./dto/IRefreshToken";
 
 export default class AuthController extends BaseController {
+    public async checkUser(req: Request, res: Response, next: NextFunction) {
+        res.send("OK");
+    }
+
+    public async checkAdministrator(req: Request, res: Response, next: NextFunction) {
+        res.send("OK");
+    }
+
     public async userLogin(req: Request, res: Response, next: NextFunction) {
         if (!IUserLoginValidator(req.body)) {
             return res.status(400).send(IUserLoginValidator.errors);
@@ -18,7 +26,7 @@ export default class AuthController extends BaseController {
 
         const user = await this.services.userService.getByEmail(data.email) as UserModel;
 
-        if (user === null) return res.sendStatus(404);
+        if (user === null) return res.status(404).send("User not found.")
 
         if (!bcrypt.compareSync(data.password, user.passwordHash)) {
             await new Promise(resolve => setTimeout(resolve, 1000));

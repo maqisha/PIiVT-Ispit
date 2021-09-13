@@ -13,6 +13,6 @@ export default class UserRouter implements IRouter {
         app.post("/user", AuthMiddleware.getVerifier('administrator'), userController.add.bind(userController));
         app.put("/user/:id", AuthMiddleware.getVerifier('administrator', 'user'), userController.edit.bind(userController));
         app.delete("/user/:id", AuthMiddleware.getVerifier('administrator'), userController.delete.bind(userController));
-        app.post("/auth/register", AuthMiddleware.getVerifier('administrator', 'user'), userController.register.bind(userController))
+        app.post("/auth/register", userController.register.bind(userController))
     }
 }
