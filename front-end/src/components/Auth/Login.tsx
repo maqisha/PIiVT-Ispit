@@ -7,22 +7,29 @@ import { Redirect } from 'react-router-dom';
 const Login = () => {
     const [email, setEmail] = useState<string>("");
     const [pass, setPass] = useState<string>("");
+    const [address, setAddress] = useState<string>("");
+    const [phone, setPhone] = useState<string>("");
+    const [name, setName] = useState<string>("");
+
     const [message, setMessage] = useState<string>("");
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+    const [isRegister, setIsRegister] = useState<boolean>(false);
 
 
     const login = () => {
         AuthService.login(email, pass);
     }
 
-    const handleAuthEvent = (status: string, data: any) => {
-        if (status === "login_failed") {
-            if (Array.isArray(data?.data) && data?.data[0]?.dataPath === ".email") {
-                return setMessage("Invalid email: " + data?.data[0]?.message);
-            }
+    const register = () => {
+        AuthService.register(email, pass, name, address, phone);
+    }
 
-            if (Array.isArray(data?.data) && data?.data[0]?.dataPath === ".password") {
-                return setMessage("Invalid password: " + data?.data[0]?.message);
+    const handleAuthEvent = (status: string, data: any) => {
+        if (status === "login_failed" || status =="register_failed") {
+            if (Array.isArray(data?.data) && data?.data[0]?.dataPath.substring(0,1) === ".") {
+                const property = data?.data[0]?.dataPath.substring(1);
+                return setMessage(`Invalid ${property}`);
             }
 
             if (!Array.isArray(data.data)) {
@@ -50,11 +57,28 @@ const Login = () => {
     return (
         <div>
             <h1>{message}</h1>
-            <form noValidate autoComplete="off">
-                <TextField label="E-mail" required value={email} onChange={e => setEmail(e.target.value)} />
-                <TextField label="Password" required value={pass} onChange={e => setPass(e.target.value)} type="password" />
-                <Button variant="contained" color="primary" onClick={login}> Login </Button>
-            </form>
+            {
+                !isRegister ?
+                    <form noValidate autoComplete="off">
+                        <TextField label="E-mail" required value={email} onChange={e => setEmail(e.target.value)} />
+                        <TextField label="Password" required value={pass} onChange={e => setPass(e.target.value)} type="password" />
+                        <Button variant="contained" color="primary" onClick={login}> Login </Button>
+                    </form>
+                    :
+                    <form noValidate autoComplete="off">
+                        <TextField label="E-mail" required value={email} onChange={e => setEmail(e.target.value)} />
+                        <TextField label="Password" required value={pass} onChange={e => setPass(e.target.value)} type="password" />
+                        <TextField label="Name" required value={name} onChange={e => setName(e.target.value)} />
+                        <TextField label="Address" required value={address} onChange={e => setAddress(e.target.value)} />
+                        <TextField label="Phone" required value={phone} onChange={e => setPhone(e.target.value)} />
+                        <Button variant="contained" color="primary" onClick={register}> Register </Button>
+                    </form>
+            }
+
+            <a onClick={()=>setIsRegister(!isRegister)}>Don't have an account yet? Click here to register!</a>
+
+
+
         </div>
     )
 }

@@ -54,7 +54,7 @@ export default function App() {
       <div className="App">
         <h1>Pizzeria Maqi</h1>
         {authorizedRole}
-        <Menu />
+        <Menu authorizedRole={authorizedRole}/>
         <main>
           <Switch>
             <Route path='/pizza' component={PizzaPage} exact />

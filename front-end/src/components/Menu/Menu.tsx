@@ -1,13 +1,22 @@
 import { Link } from "react-router-dom";
 
-const Menu = () => {
+interface MenuProperties {
+    authorizedRole: string;
+}
+
+
+const Menu = (props: MenuProperties) => {
     return (
         <nav>
             <ul>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/pizza">Menu</Link></li>
-                <li><Link to="/contact">Contact</Link></li>
-                <li><Link to="/auth/logout">Logout</Link></li>
+                {
+                    props.authorizedRole === 'visitor' ?
+                        <li><Link to="/auth/login">Login</Link></li> :
+                        <li><Link to="/auth/logout">Logout</Link></li>
+                }
+
             </ul>
         </nav>
     )
