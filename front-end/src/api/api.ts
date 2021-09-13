@@ -1,5 +1,6 @@
 import AppConfig from '../config/app.config'
 import axios, { AxiosResponse } from 'axios';
+import EventRegister from './EventRegister';
 
 type ApiMethod = 'get' | 'post' | 'put' | 'delete';
 type ApiResponseStatus = 'ok' | 'error' | 'login';
@@ -47,6 +48,7 @@ export default function api(
                     api(method, path, role, body, false)
                         .then(res => resolve(res))
                         .catch(error => {
+                            EventRegister.emit("AUTH_EVENT", "force_login");
                             return resolve({
                                 status: 'login',
                                 data: null,
@@ -56,6 +58,7 @@ export default function api(
                 }
 
                 if (errorStatusCode === 401) {
+                    EventRegister.emit("AUTH_EVENT", "force_login");
                     return resolve({
                         status: 'login',
                         data: null,
@@ -63,6 +66,7 @@ export default function api(
                 }
 
                 if (errorStatusCode === 403) {
+                    EventRegister.emit("AUTH_EVENT", "force_login");
                     return resolve({
                         status: 'login',
                         data: "Unauthorized",
