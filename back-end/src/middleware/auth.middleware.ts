@@ -7,7 +7,7 @@ type UserRole = "user" | "administrator";
 
 export default class AuthMiddleware {
     private static veryfyAuthToken(req: Request, res: Response, next: NextFunction, allowedRoles: UserRole[]) {
-        return next();
+        // return next();
 
         if (typeof req.headers.authorization !== "string") {
             return res.status(401).send("You are not authorized for this action");
@@ -16,11 +16,11 @@ export default class AuthMiddleware {
         const [tokenType, tokenString] = req.headers.authorization.trim().split(" ");
 
         if (tokenType !== "Bearer") {
-            return res.status(400).send("Invalid auth token type!");
+            return res.status(401).send("Invalid auth token type!");
         }
 
         if (typeof tokenString !== "string" || tokenString.length === 0) {
-            return res.status(400).send("Invalid auth token data!");
+            return res.status(401).send("Invalid auth token data!");
         }
 
 
@@ -33,11 +33,11 @@ export default class AuthMiddleware {
             } else
                 result = jwt.verify(tokenString, CFG.auth.user.auth.public);
         } catch (e) {
-            return res.status(500).send("Status validation error " + e?.message);
+            return res.status(401).send("Token validation error " + e?.message);
         }
 
         if (typeof result !== "object") {
-            return res.status(400).send("Invalid auth token data!");
+            return res.status(401).send("Invalid auth token data!");
         }
 
         const data: ITokenData = result as ITokenData;

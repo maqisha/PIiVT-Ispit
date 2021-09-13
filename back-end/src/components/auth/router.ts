@@ -8,5 +8,6 @@ export default class AuthRouter implements IRouter {
         const authController: AuthController = new AuthController(resources);
 
         app.post("/auth/login", authController.userLogin.bind(authController));
+        app.post("/auth/refresh", authController.refreshToken.bind(authController));
     }
 }

@@ -3,6 +3,8 @@ import axios, { AxiosResponse } from 'axios';
 
 type ApiMethod = 'get' | 'post' | 'put' | 'delete';
 type ApiResponseStatus = 'ok' | 'error' | 'login';
+type ApiRole = 'administrator' | 'user';
+type TokenType = 'auth' | 'refresh';
 
 interface ApiResponse {
     status: ApiResponseStatus,
@@ -12,7 +14,9 @@ interface ApiResponse {
 export default function api(
     method: ApiMethod,
     path: string,
-    body: any | undefined = undefined
+    role: ApiRole = 'user',
+    body: any | undefined = undefined,
+    doRefresh: boolean = true,
 ): Promise<ApiResponse | undefined> {
     return new Promise<ApiResponse | undefined>(resolve => {
         axios({
@@ -22,20 +26,44 @@ export default function api(
             data: body ? JSON.stringify(body) : '',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorisation': 'Bearer NO-TOKEN'
+                'Authorization': `Bearer ${getToken(role, "auth")}`
             }
         })
-            .then(result => responseHandler(result, resolve))
-            .catch(error => {
-                if (error?.response?.status === 401) {
-                    resolve({
+            .then(res => responseHandler(res, resolve))
+            .catch(async error => {
+                const errorStatusCode = error?.response.status;
+                if (doRefresh && errorStatusCode === 401) {
+                    const newToken: string | null = await refreshToken(role);
+                    console.log("Requesting a refresh token . . .")
+                    if (newToken === null) {
+                        return resolve({
+                            status: 'login',
+                            data: null,
+                        })
+                    }
+
+                    saveToken(role, "auth", newToken);
+
+                    api(method, path, role, body, false)
+                        .then(res => resolve(res))
+                        .catch(error => {
+                            return resolve({
+                                status: 'login',
+                                data: null,
+                            })
+                        })
+                    return;
+                }
+
+                if (errorStatusCode === 401) {
+                    return resolve({
                         status: 'login',
                         data: null,
                     })
                 }
 
-                if (error?.response?.status === 403) {
-                    resolve({
+                if (errorStatusCode === 403) {
+                    return resolve({
                         status: 'login',
                         data: "Unauthorized",
                     })
@@ -60,5 +88,40 @@ function responseHandler(res: AxiosResponse, resolve: (data?: ApiResponse) => vo
     resolve({
         status: 'ok',
         data: res.data,
+    })
+}
+
+function getToken(role: ApiRole, tokenType: TokenType): string {
+    return localStorage.getItem(`${role}_${tokenType}_TOKEN`) ?? '';
+}
+
+export function saveToken(role: ApiRole, tokenType: TokenType, token: string): void {
+    localStorage.setItem(`${role}_${tokenType}_TOKEN`, token);
+}
+
+function refreshToken(role: ApiRole): Promise<string | null> {
+    return new Promise<string | null>(resolve => {
+        axios({
+            method: 'post',
+            baseURL: AppConfig.API_URL,
+            url: '/auth/refresh',
+            data: JSON.stringify({
+                refreshToken: getToken(role, "refresh"),
+                role
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(res => {
+                if (res.status !== 200) {
+                    return resolve(null);
+                }
+
+                resolve(res.data?.authToken);
+            })
+            .catch(() => {
+                resolve(null);
+            })
     })
 }

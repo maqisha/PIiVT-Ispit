@@ -12,7 +12,7 @@ const PizzaPage = () => {
                 if (Array.isArray(pizzas) && pizzas.length > 0)
                     setPizzas(pizzas);
             })
-    })
+    }, [])
 
     return (
         <div className="PizzaPage">

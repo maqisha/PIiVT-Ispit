@@ -6,7 +6,7 @@ import UserModel from "../user/model";
 import ITokenData from "./dto/ITokenData.inferface";
 import * as jwt from "jsonwebtoken";
 import CFG from "../../config/dev";
-import { readFileSync } from "fs";
+import { IRefreshToken, IRefreshTokenValidator } from "./dto/IRefreshToken";
 
 export default class AuthController extends BaseController {
     public async userLogin(req: Request, res: Response, next: NextFunction) {
@@ -59,7 +59,44 @@ export default class AuthController extends BaseController {
 
         res.send({
             authToken,
-            refreshToken
+            refreshToken,
+            role: user.isAdmin ? "administrator" : "user"
         })
+    }
+
+    async refreshToken(req: Request, res: Response, next: NextFunction) {
+        if (!IRefreshTokenValidator(req.body)) {
+            return res.status(400).send(IRefreshTokenValidator.errors);
+        }
+
+        const token: IRefreshToken = req.body as IRefreshToken;
+
+        try {
+            const tokenData = jwt.verify(token.refreshToken, CFG.auth[token.role].auth.public) as ITokenData;
+
+            const newTokenData: ITokenData = {
+                id: tokenData.id,
+                identity: tokenData.identity,
+                role: tokenData.role,
+            }
+
+            const authToken = jwt.sign(
+                newTokenData,
+                token.role === 'administrator' ? CFG.auth.administrator.auth.private : CFG.auth.user.auth.private,
+                {
+                    algorithm: token.role === 'administrator' ? CFG.auth.administrator.algorithm : CFG.auth.user.algorithm,
+                    issuer: token.role === 'administrator' ? CFG.auth.administrator.issuer : CFG.auth.user.issuer,
+                    expiresIn: token.role === 'administrator' ? CFG.auth.administrator.auth.duration : CFG.auth.user.auth.duration,
+                }
+            );
+
+            res.send({
+                authToken,
+                refreshToken: null,
+                role: token.role,
+            })
+        } catch (error) {
+            return res.status(400).send("Invalid refresh token " + error?.message);
+        }
     }
 }
