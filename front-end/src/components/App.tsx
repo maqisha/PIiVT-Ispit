@@ -5,6 +5,7 @@ import EventRegister from '../api/EventRegister';
 import './App.scss';
 import Login from './Auth/Login';
 import Logout from './Auth/Logout';
+import Cart from './Cart/Cart';
 import Home from './Home/Home';
 import Menu from './Menu/Menu';
 import PizzaPage from './Pizza/PizzaPage';
@@ -43,7 +44,7 @@ export default function App() {
     EventRegister.on("AUTH_EVENT", authEventHandler);
     checkRole('user');
     checkRole('administrator');
-  
+
     return () => {
       EventRegister.off("AUTH_EVENT", authEventHandler);
     }
@@ -52,18 +53,24 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <h1>Pizzeria Maqi</h1>
-        {authorizedRole}
-        <Menu authorizedRole={authorizedRole}/>
-        <main>
-          <Switch>
-            <Route path='/pizza' component={PizzaPage} exact />
-            <Route path='/auth/login' component={Login} exact />
-            <Route path='/auth/logout' component={Logout} exact />
-            <Route component={Home} />
-          </Switch>
+        <header>
+          <h1>Pizzeria Maqi</h1>
+          <Menu authorizedRole={authorizedRole} />
+        </header>
 
-        </main>
+        <div className="main-container">
+          <main>
+            <Switch>
+              <Route path='/pizza' component={PizzaPage} exact />
+              <Route path='/auth/login' component={Login} exact />
+              <Route path='/auth/logout' component={Logout} exact />
+              <Route component={Home} />
+            </Switch>
+          </main>
+          <aside>
+            <Cart />
+          </aside>
+        </div>
         <footer></footer>
       </div>
     </BrowserRouter>

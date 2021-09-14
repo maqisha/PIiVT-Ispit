@@ -1,0 +1,46 @@
+.pizza {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25%;
+    padding: 1.5rem;
+    border: 1px solid black;
+    img {
+        width: 100%;
+    }
+
+    .content {
+        margin-bottom: 2rem;
+        text-align: center;
+
+        h4 {
+            font-size: 1.6rem;
+        }
+    }
+
+    .size-price {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .size {
+            width: 50%;
+        }
+
+        .price {
+            color: orange;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+    }
+
+    .order {
+        margin-top: 1rem;
+        width: 100%;
+        background-color: orange;
+    }
+
+    .order:hover {
+        background-color: orangered;
+    }
+}

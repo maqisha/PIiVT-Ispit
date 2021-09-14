@@ -1,3 +1,4 @@
+import './PizzaPage.scss';
 import { useEffect, useState } from "react"
 import PizzaItem from "./PizzaItem"
 import PizzaModel from "../../../../back-end/src/components/pizza/model"
@@ -15,7 +16,7 @@ const PizzaPage = () => {
     }, [])
 
     return (
-        <div className="PizzaPage">
+        <div className="pizza-page">
             {pizzas.map(pizza => <PizzaItem key={pizza.pizzaId} pizza={pizza} />)}
         </div>
     )

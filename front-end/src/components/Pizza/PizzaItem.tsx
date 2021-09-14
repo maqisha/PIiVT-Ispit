@@ -1,43 +1,68 @@
+import './PizzaItem.scss';
 import PizzaModel from "../../../../back-end/src/components/pizza/model"
-import { Button, Card, CardMedia, CardContent, Typography } from '@material-ui/core'
+import { Button, FormControl, Select, MenuItem, FormHelperText } from '@material-ui/core'
 import AppConfig from '../../config/app.config';
-import { makeStyles } from '@material-ui/core/styles';
-import { classicNameResolver } from "typescript";
+import CartService, { PizzaSize } from "../../services/CartService";
+import { useState } from "react";
 
 interface PizzaItemProperties {
     pizza: PizzaModel
 }
 
-const useStyles = makeStyles({
-    media: {
-        height: 140,
-    },
-});
 
 const PizzaItem = (props: PizzaItemProperties) => {
-    const classes = useStyles();
+    const [size, setSize] = useState<PizzaSize>('medium');
+
+    const addToCart = () => {
+        CartService.add(props.pizza, 1, size);
+    }
+
+    const getSmallImage = (): string => {
+        if (props.pizza.imagePath) {
+            let [path, extension] = props.pizza.imagePath.split('.');
+            path = `${path}-small`;
+
+            return AppConfig.UPLOAD_PATH + path + "." + extension;
+        }
+
+        return "";
+    }
 
     return (
-        <Card className="Pizza">
-            <CardMedia
-                className={classes.media}
-            image={AppConfig.UPLOAD_PATH + props.pizza.imagePath as string}
-            title="Contemplative Reptile"
-            />
+        <div className="pizza">
+            <img src={getSmallImage()} />
 
-            <CardContent>
-                <Typography variant="h4" >{props.pizza.name}</Typography>
-                <Typography paragraph><strong>Price:</strong>{props.pizza.price}</Typography>
-                <Typography paragraph>
+            <div className="content">
+                <h4 >{props.pizza.name}</h4>
+                <p>
                     {
                         props.pizza.ingredients.map(ingredient => (
                             <span key={ingredient.ingredientId}>{ingredient.name + ", "}</span>
                         ))
                     }
-                </Typography>
-            </CardContent>
-            <Button color="primary">Order</Button>
-        </Card>
+                </p>
+            </div>
+            <div className="size-price">
+                <FormControl className="size" variant="outlined">
+                    <Select
+                        color="secondary"
+                        value={size}
+                        onChange={e => setSize(e.target.value as PizzaSize)}
+                        inputProps={{
+                            name: 'Size',
+                            id: 'pizza-size',
+                        }}
+                    >
+                        <MenuItem value={'small'}>Small</MenuItem>
+                        <MenuItem value={'medium'}>Medium</MenuItem>
+                        <MenuItem value={'large'}>Large</MenuItem>
+                    </Select>
+                    {/* <FormHelperText>Size</FormHelperText> */}
+                </FormControl>
+                <div className="price">{CartService.getCartItemPrice(props.pizza, 1, size)}$</div>
+            </div>
+            <Button color="secondary" variant="contained" className="order" onClick={addToCart}>Order</Button>
+        </div>
     )
 }
 

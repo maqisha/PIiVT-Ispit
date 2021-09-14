@@ -36,6 +36,11 @@ export default function api(
                 })
             })
             .catch(async error => {
+                if (!error?.response) return resolve({
+                    status: 'error',
+                    data: error
+                })
+
                 const errorStatusCode = error?.response.status;
 
                 if (doRefresh && errorStatusCode === 401) {
