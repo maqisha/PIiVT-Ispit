@@ -1,20 +1,20 @@
 import * as Ajv from "ajv";
-import { PizzaOrder } from "../model";
+import { CartItemModel } from "../model";
 
 const ajv = Ajv();
 
 interface IAddOrder {
-    pizzaOrders: PizzaOrder[],
+    cartItems: CartItemModel[],
     comment: string,
 }
 
-const IAddToCartValidator = ajv.compile({
+const IAddOrderValidator = ajv.compile({
     type: "object",
     properties: {
         comment: {
             type: "string",
         },
-        pizzaOrders: {
+        cartItems: {
             type: "array",
             minItems: 1,
             items: {
@@ -37,15 +37,16 @@ const IAddToCartValidator = ajv.compile({
                     "quantity",
                     "size",
                 ],
+                additionalProperties: true,
             }
         }
     },
     required: [
-        "pizzaOrders",
+        "comment",
+        "cartItems",
     ],
     additionalProperties: false,
 });
 
 export default IAddOrder;
-export { PizzaOrder }
-export { IAddToCartValidator };
+export { IAddOrderValidator };

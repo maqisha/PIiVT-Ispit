@@ -27,7 +27,7 @@ export default abstract class BaseService<T extends IModel> {
 
     protected async getAllFromTable<AdapterOptions extends IAdaptModelOptions>(tableName: string, options: Partial<AdapterOptions> = {}): Promise<T[] | null | IErrorResponse> {
         return new Promise<T[] | null | IErrorResponse>(async resolve => {
-            const sql: string = `SELECT * FROM ${tableName};`;
+            const sql: string = `SELECT * FROM \`${tableName}\`;`;
             this.resources.conn.execute(sql)
                 .then(async result => {
                     const [rows, columns] = result;
@@ -52,7 +52,7 @@ export default abstract class BaseService<T extends IModel> {
 
     protected async getByIdFromTable<AdapterOptions extends IAdaptModelOptions>(tableName: string, id: number, options: Partial<AdapterOptions> = {}): Promise<T | null | IErrorResponse> {
         return new Promise<T | null | IErrorResponse>(async resolve => {
-            const sql: string = `SELECT * FROM ${tableName} WHERE ${tableName}_id = ?;`;
+            const sql: string = `SELECT * FROM \`${tableName}\` WHERE ${tableName}_id = ?;`;
             this.resources.conn.execute(sql, [id])
                 .then(async result => {
                     const [rows, columns] = result;
@@ -81,10 +81,10 @@ export default abstract class BaseService<T extends IModel> {
         options: Partial<AdapterOptions> = {}
     ): Promise<T[] | IErrorResponse> {
         return new Promise<T[] | IErrorResponse>(async (resolve) => {
-            let sql = `SELECT * FROM ${tableName} WHERE ${fieldName} = ?;`;
+            let sql = `SELECT * FROM \`${tableName}\` WHERE \`${fieldName}\` = ?;`;
 
             if (fieldValue === null) {
-                sql = `SELECT * FROM ${tableName} WHERE ${fieldName} IS NULL;`;
+                sql = `SELECT * FROM \`${tableName}\` WHERE \`${fieldName}\` IS NULL;`;
             }
 
             this.db.execute(sql, [fieldValue])

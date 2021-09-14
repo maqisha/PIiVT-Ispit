@@ -75,6 +75,72 @@ export default function api(
     })
 }
 
+export function apiAsForm(
+    method: ApiMethod,
+    path: string,
+    body: FormData,
+    doRefresh: boolean = true,
+): Promise<ApiResponse> {
+    return new Promise<ApiResponse>(resolve => {
+        axios({
+            method: method,
+            baseURL: AppConfig.API_URL,
+            url: path,
+            data: body,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + getToken('auth'),
+            },
+        })
+            .then(res => {
+                resolve({
+                    status: 'ok',
+                    data: res.data,
+                });
+            })
+            .catch(async error => {
+                if (!error?.response) return resolve({
+                    status: 'error',
+                    data: error
+                })
+
+                const errorStatusCode = error?.response.status;
+
+                if (doRefresh && errorStatusCode === 401) {
+                    const newToken: string | null = await refreshToken(localStorage.getItem('role') as ApiRole);
+
+                    if (newToken === null) {
+                        return resolve({
+                            status: 'error',
+                            data: null,
+                        });
+                    }
+
+                    saveToken('auth', newToken);
+
+                    apiAsForm(method, path, body, false)
+                        .then(res => resolve(res))
+                        .catch(() => { EventRegister.emit("AUTH_EVENT", "force_login"); });
+
+                    return;
+                }
+
+                if (errorStatusCode === 401) {
+                    EventRegister.emit("AUTH_EVENT", "force_login");
+                }
+
+                if (errorStatusCode === 403) {
+                    EventRegister.emit("AUTH_EVENT", "force_login");
+                }
+
+                resolve({
+                    status: 'error',
+                    data: error?.response,
+                })
+            });
+    });
+}
+
 function refreshToken(role: ApiRole): Promise<string | null> {
     return new Promise<string | null>(resolve => {
         axios({

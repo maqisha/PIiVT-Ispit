@@ -10,7 +10,11 @@ const Menu = (props: MenuProperties) => {
         <nav>
             <ul>
                 <li><Link to="/">Home</Link></li>
-                <li><Link to="/pizza">Menu</Link></li>
+                {
+                    props.authorizedRole !== 'visitor' ?
+                        <li><Link to="/pizza">Menu</Link></li> : ""
+                }
+
                 {
                     props.authorizedRole === 'visitor' ?
                         <li><Link to="/auth/login">Login</Link></li> :

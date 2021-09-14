@@ -2,22 +2,26 @@ import IModel from "../../common/IModel.interface";
 import PizzaModel from "../pizza/model";
 import UserModel from "../user/model";
 
-type PizzaSize = "small" | "medium" | "large";
-type OrderStatus = "rejected" | "pending" | "delivered";
+export type OrderStatus = "rejected" | "pending" | "delivered";
 
-interface PizzaOrder {
+export interface CartItemModel {
     pizzaId: number,
     pizza?: PizzaModel,
     quantity: number,
-    size: PizzaSize,
+    size: PizzaSize
 }
 
+export interface CartModel {
+    cartItems: CartItemModel[],
+    comment: string
+}
+
+
+export type PizzaSize = 'small' | 'medium' | 'large';
 export default class OrderModel implements IModel{
     orderId: number;
-    pizzaOrders: PizzaOrder[];
+    cartItems: CartItemModel[];
     comment: string;
     status: OrderStatus;
     user: UserModel;
 }
-
-export { PizzaOrder, PizzaSize }

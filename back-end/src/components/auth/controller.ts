@@ -25,7 +25,6 @@ export default class AuthController extends BaseController {
         const data = req.body as IUserLogin;
 
         const user = await this.services.userService.getByEmail(data.email) as UserModel;
-
         if (user === null) return res.status(404).send("User not found.")
 
         if (!bcrypt.compareSync(data.password, user.passwordHash)) {

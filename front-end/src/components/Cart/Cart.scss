@@ -1,4 +1,25 @@
 .cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: rgba(236, 236, 236, 1);
     padding: 1rem;
+    width: 250px;
+
+    .cart-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .cartItems {
+        width: 90%;
+    }
+
+    .order {
+        background-color: orange;
+    }
+
+    .order:hover {
+        background-color: orangered;
+    }
 }

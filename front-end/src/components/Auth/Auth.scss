@@ -1,0 +1,17 @@
+.auth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 40%;
+
+        .input, Button {
+            width: 100%;
+            margin: 5px;
+        }
+    }
+}

@@ -61,7 +61,7 @@ export default function App() {
         <div className="main-container">
           <main>
             <Switch>
-              <Route path='/pizza' component={PizzaPage} exact />
+              <Route path='/pizza' render={(props) => <PizzaPage authorizedRole={authorizedRole} />} exact />
               <Route path='/auth/login' component={Login} exact />
               <Route path='/auth/logout' component={Logout} exact />
               <Route component={Home} />

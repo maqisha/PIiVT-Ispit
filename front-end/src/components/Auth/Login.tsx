@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import EventRegister from '../../api/EventRegister';
 import AuthService from '../../services/AuthService';
 import { Redirect } from 'react-router-dom';
+import './Auth.scss';
 
 const Login = () => {
     const [email, setEmail] = useState<string>("");
@@ -55,22 +56,22 @@ const Login = () => {
     if (isLoggedIn) return <Redirect to="/" />
 
     return (
-        <div>
-            <h1>{message}</h1>
+        <div className="auth">
+            <h3>{message}</h3>
             {
                 !isRegister ?
                     <form noValidate autoComplete="off">
-                        <TextField label="E-mail" required value={email} onChange={e => setEmail(e.target.value)} />
-                        <TextField label="Password" required value={pass} onChange={e => setPass(e.target.value)} type="password" />
+                        <TextField className="input" label="E-mail" required value={email} onChange={e => setEmail(e.target.value)} />
+                        <TextField className="input" label="Password" required value={pass} onChange={e => setPass(e.target.value)} type="password" />
                         <Button variant="contained" color="primary" onClick={login}> Login </Button>
                     </form>
                     :
                     <form noValidate autoComplete="off">
-                        <TextField label="E-mail" required value={email} onChange={e => setEmail(e.target.value)} />
-                        <TextField label="Password" required value={pass} onChange={e => setPass(e.target.value)} type="password" />
-                        <TextField label="Name" required value={name} onChange={e => setName(e.target.value)} />
-                        <TextField label="Address" required value={address} onChange={e => setAddress(e.target.value)} />
-                        <TextField label="Phone" required value={phone} onChange={e => setPhone(e.target.value)} />
+                        <TextField className="input" label="E-mail" required value={email} onChange={e => setEmail(e.target.value)} />
+                        <TextField className="input" label="Password" required value={pass} onChange={e => setPass(e.target.value)} type="password" />
+                        <TextField className="input" label="Name" required value={name} onChange={e => setName(e.target.value)} />
+                        <TextField className="input" label="Address" required value={address} onChange={e => setAddress(e.target.value)} />
+                        <TextField className="input" label="Phone" required value={phone} onChange={e => setPhone(e.target.value)} />
                         <Button variant="contained" color="primary" onClick={register}> Register </Button>
                     </form>
             }

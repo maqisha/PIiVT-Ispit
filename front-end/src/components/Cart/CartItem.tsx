@@ -16,7 +16,7 @@ const CartItem = (props: CartItemProperties) => {
         <div className="cartItem">
             <div className="content">
                 <div className="name-size">
-                    <div>{props.cartItem.quantity} x {props.cartItem.pizza.name}</div>
+                    <div>{props.cartItem.quantity} x <strong>{props.cartItem.pizza.name}</strong></div>
                     <div>Size: {props.cartItem.size}</div>
                 </div>
                 <div className="price">{CartService.getCartItemPrice(props.cartItem.pizza, props.cartItem.quantity, props.cartItem.size)}$</div>
