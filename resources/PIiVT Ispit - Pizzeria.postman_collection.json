@@ -1,0 +1,3476 @@
+{
+	"info": {
+		"_postman_id": "6d2e8836-4384-4799-95d5-cb6a09ec30d9",
+		"name": "PIiVT Ispit - Pizzeria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pizza",
+			"item": [
+				{
+					"name": "GET all pizzas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/pizza",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"pizza"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all pizzaz",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/pizza",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "930"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3a2-xZfdYBZRR84nrkjF3+3PXTJJszE\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:15:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"imagePath\": \"static/uploads/2021/09/9ec58291-58d6-422d-8c40-3425ab83b7b5-margarita.jpg\",\n        \"ingredients\": [\n            {\n                \"ingredientId\": 1,\n                \"name\": \"Pecurke Edit\",\n                \"price\": 155\n            },\n            {\n                \"ingredientId\": 2,\n                \"name\": \"Kackavalj\",\n                \"price\": 10\n            },\n            {\n                \"ingredientId\": 3,\n                \"name\": \"Test\",\n                \"price\": 20\n            }\n        ],\n        \"pizzaId\": 14,\n        \"name\": \"Margarita\",\n        \"price\": 15,\n        \"isActive\": true\n    },\n    {\n        \"imagePath\": \"static/uploads/2021/09/d4268c71-7193-4b2b-baaf-d26e58db21d7-mexicana.jpg\",\n        \"ingredients\": [\n            {\n                \"ingredientId\": 1,\n                \"name\": \"Pecurke Edit\",\n                \"price\": 155\n            },\n            {\n                \"ingredientId\": 2,\n                \"name\": \"Kackavalj\",\n                \"price\": 10\n            },\n            {\n                \"ingredientId\": 3,\n                \"name\": \"Test\",\n                \"price\": 20\n            }\n        ],\n        \"pizzaId\": 15,\n        \"name\": \"Mexicana\",\n        \"price\": 19,\n        \"isActive\": true\n    },\n    {\n        \"imagePath\": \"static/uploads/2021/09/d86c213e-2465-4a0a-98bd-ae99542d113b-peperoni.jpg\",\n        \"ingredients\": [\n            {\n                \"ingredientId\": 1,\n                \"name\": \"Pecurke Edit\",\n                \"price\": 155\n            },\n            {\n                \"ingredientId\": 2,\n                \"name\": \"Kackavalj\",\n                \"price\": 10\n            },\n            {\n                \"ingredientId\": 3,\n                \"name\": \"Test\",\n                \"price\": 20\n            }\n        ],\n        \"pizzaId\": 16,\n        \"name\": \"Peperoni\",\n        \"price\": 20,\n        \"isActive\": true\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET pizza by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/pizza/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"pizza",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET pizza by ID - Valid ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/pizza/15",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza",
+										"15"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "308"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"134-OibY9P+WPYp8ger3KBm8IR25+6Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:16:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"imagePath\": \"static/uploads/2021/09/d4268c71-7193-4b2b-baaf-d26e58db21d7-mexicana.jpg\",\n    \"ingredients\": [\n        {\n            \"ingredientId\": 1,\n            \"name\": \"Pecurke Edit\",\n            \"price\": 155\n        },\n        {\n            \"ingredientId\": 2,\n            \"name\": \"Kackavalj\",\n            \"price\": 10\n        },\n        {\n            \"ingredientId\": 3,\n            \"name\": \"Test\",\n            \"price\": 20\n        }\n    ],\n    \"pizzaId\": 15,\n    \"name\": \"Mexicana\",\n    \"price\": 19,\n    \"isActive\": true\n}"
+						},
+						{
+							"name": "GET pizza by Id - Invalid ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/pizza/-1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza",
+										"-1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "18"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12-f+3hdSC66EM8zs+iKspfvFnH9H0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:16:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid ID number."
+						},
+						{
+							"name": "GET pizza by Id - Non-existing ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/pizza/99",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza",
+										"99"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:16:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				},
+				{
+					"name": "POST pizza",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Capricoza\",\r\n    \"imagePath\": \"www.google.com/slika.png\",\r\n    \"price\": 700\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/pizza",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"pizza"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST pizza - Valid Pizza",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "data",
+											"value": "{\n\t\"name\": \"Capricoza\",\n\t\"price\": 16,\n\t\"ingredientIds\": [1, 2, 3]\n}",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/MarkoKasporski/Desktop/capricoza.jpg"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/pizza",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "310"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"136-dcwyb0VPZnn22q6nQn1BziacKgo\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:18:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"imagePath\": \"static/uploads/2021/09/2aa8afac-e90f-4bd2-9e10-a912d3245675-capricoza.jpg\",\n    \"ingredients\": [\n        {\n            \"ingredientId\": 1,\n            \"name\": \"Pecurke Edit\",\n            \"price\": 155\n        },\n        {\n            \"ingredientId\": 2,\n            \"name\": \"Kackavalj\",\n            \"price\": 10\n        },\n        {\n            \"ingredientId\": 3,\n            \"name\": \"Test\",\n            \"price\": 20\n        }\n    ],\n    \"pizzaId\": 17,\n    \"name\": \"Capricoza\",\n    \"price\": 16,\n    \"isActive\": true\n}"
+						},
+						{
+							"name": "POST pizza - Valid Data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Capricoza\",\r\n    \"imagePath\": \"www.google.com/slika.png\",\r\n    \"price\": 700\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/pizza",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "99"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"63-F14rONYzxTb+fUA8ok0mgYLCjJM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:17:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"imagePath\": \"www.google.com/slika.png\",\n    \"pizzaId\": 7,\n    \"name\": \"Capricoza\",\n    \"price\": 700,\n    \"isActive\": true\n}"
+						},
+						{
+							"name": "POST pizza - Invalid Data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"C\",\r\n    \"imagePath\": \"www.google.com/slika\",\r\n    \"price\": -1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/pizza",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "160"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a0-JaXvdONUj/+EOGeo/Z1LsQ7Khik\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:18:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"keyword\": \"minLength\",\n        \"dataPath\": \".name\",\n        \"schemaPath\": \"#/properties/name/minLength\",\n        \"params\": {\n            \"limit\": 2\n        },\n        \"message\": \"should NOT be shorter than 2 characters\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "DELETE pizza",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Nova Pizza\",\r\n    \"imagePath\": \"www.google.com/slika.jpg\",\r\n    \"price\": 800\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/pizza/7",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"pizza",
+								"7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE pizza - A valid ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Nova Pizza\",\r\n    \"imagePath\": \"www.google.com/slika.jpg\",\r\n    \"price\": 800\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/pizza/7",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-nALfgZbm564PJvx4OYymauaDMRQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:19:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"errorMessage\": \"1 record deleted!\"\n}"
+						},
+						{
+							"name": "DELETE pizza - Invalid ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Nova Pizza\",\r\n    \"imagePath\": \"www.google.com/slika.jpg\",\r\n    \"price\": 800\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/pizza/-1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza",
+										"-1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "18"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12-f+3hdSC66EM8zs+iKspfvFnH9H0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:19:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid ID number."
+						},
+						{
+							"name": "DELETE pizza - Non-existing ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Nova Pizza\",\r\n    \"imagePath\": \"www.google.com/slika.jpg\",\r\n    \"price\": 800\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/pizza/99",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza",
+										"99"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-KaZTREMBkzSUppE4/GyPSfSw7XM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:19:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": -1,\n    \"errorMessage\": \"Record could not be deleted!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT pizza",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"N\",\r\n    \"imagePath\": \"www.google.com/slika.jp\",\r\n    \"price\": -1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/pizza/4",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"pizza",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT pizza - Valid Data/ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Nova Pizza\",\r\n    \"imagePath\": \"www.google.com/slika.jpg\",\r\n    \"price\": 800\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/pizza/6",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "100"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"64-Grj7dGUn3h65MOvxHUdkXHNRGXw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:21:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"imagePath\": \"www.google.com/slika.jpg\",\n    \"pizzaId\": 6,\n    \"name\": \"Nova Pizza\",\n    \"price\": 800,\n    \"isActive\": true\n}"
+						},
+						{
+							"name": "PUT pizza - Invalid ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Nova Pizza\",\r\n    \"imagePath\": \"www.google.com/slika.jpg\",\r\n    \"price\": 800\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/pizza/-1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza",
+										"-1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "18"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12-f+3hdSC66EM8zs+iKspfvFnH9H0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:21:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid ID number."
+						},
+						{
+							"name": "PUT pizza - Invalid Data",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"N\",\r\n    \"imagePath\": \"www.google.com/slika.jp\",\r\n    \"price\": -1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/pizza/4",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza",
+										"4"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "160"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a0-JaXvdONUj/+EOGeo/Z1LsQ7Khik\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:20:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"keyword\": \"minLength\",\n        \"dataPath\": \".name\",\n        \"schemaPath\": \"#/properties/name/minLength\",\n        \"params\": {\n            \"limit\": 2\n        },\n        \"message\": \"should NOT be shorter than 2 characters\"\n    }\n]"
+						},
+						{
+							"name": "PUT pizza - Non-existing ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Nova Pizza\",\r\n    \"imagePath\": \"www.google.com/slika.jpg\",\r\n    \"price\": 800\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/pizza/99",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"pizza",
+										"99"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:21:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Ingredient",
+			"item": [
+				{
+					"name": "GET all ingredients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/ingredient",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"ingredient"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all ingredients",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/ingredient",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"ingredient"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "141"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8d-f1Jb2kNtxcTJaquQst7xvSTHk0k\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:49:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"ingredientId\": 1,\n        \"name\": \"Pecurke\",\n        \"price\": 15\n    },\n    {\n        \"ingredientId\": 2,\n        \"name\": \"Kackavalj\",\n        \"price\": 10\n    },\n    {\n        \"ingredientId\": 3,\n        \"name\": \"Test\",\n        \"price\": 20\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET ingredient by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/ingredient/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"ingredient",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET ingredient by ID - Non-existing ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/ingredient/99",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"ingredient",
+										"99"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:14:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						},
+						{
+							"name": "GET ingredient by ID - Invalid ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/ingredient/-1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"ingredient",
+										"-1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "18"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12-f+3hdSC66EM8zs+iKspfvFnH9H0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:14:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid ID number."
+						},
+						{
+							"name": "GET ingredient by ID - Valid ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/ingredient/1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"ingredient",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-IKB7p6UlUZxDBipK7l8obPXr+GU\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:50:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ingredientId\": 1,\n    \"name\": \"Pecurke\",\n    \"price\": 15\n}"
+						}
+					]
+				},
+				{
+					"name": "POST ingredient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test2\",\r\n    \"price\": 25\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/ingredient",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"ingredient"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST ingredient - Invalid Body",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"c\",\r\n    \"price\": -1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/ingredient",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"ingredient"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "160"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a0-JaXvdONUj/+EOGeo/Z1LsQ7Khik\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:50:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"keyword\": \"minLength\",\n        \"dataPath\": \".name\",\n        \"schemaPath\": \"#/properties/name/minLength\",\n        \"params\": {\n            \"limit\": 2\n        },\n        \"message\": \"should NOT be shorter than 2 characters\"\n    }\n]"
+						},
+						{
+							"name": "POST ingredient - Valid Body",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Test2\",\r\n    \"price\": 25\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/ingredient",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"ingredient"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-bKKg7Kreud8xKMvg1Zr9qf+qS74\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 21:50:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ingredientId\": 4,\n    \"name\": \"Test2\",\n    \"price\": 25\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT ingredient",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pecurke Edit\",\r\n    \"price\": 155\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/ingredient/-1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"ingredient",
+								"-1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT ingredient - Invalid ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Pecurke Edit\",\r\n    \"price\": 155\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/ingredient/-1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"ingredient",
+										"-1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "18"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12-f+3hdSC66EM8zs+iKspfvFnH9H0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 23:21:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid ID number."
+						},
+						{
+							"name": "PUT ingredient - Non-existing ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Pecurke Edit\",\r\n    \"price\": 155\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/ingredient/99",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"ingredient",
+										"99"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 23:24:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						},
+						{
+							"name": "PUT ingredient - Valid Body/ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Pecurke Edit\",\r\n    \"price\": 155\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/ingredient/1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"ingredient",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-96BdNaoKOactlYeFAAfhBvV0iMM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 23:16:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ingredientId\": 1,\n    \"name\": \"Pecurke Edit\",\n    \"price\": 155\n}"
+						},
+						{
+							"name": "PUT ingredient - Invalid Body",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"c\",\r\n    \"price\": -1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/ingredient/1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"ingredient",
+										"1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "160"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a0-JaXvdONUj/+EOGeo/Z1LsQ7Khik\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 23:21:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"keyword\": \"minLength\",\n        \"dataPath\": \".name\",\n        \"schemaPath\": \"#/properties/name/minLength\",\n        \"params\": {\n            \"limit\": 2\n        },\n        \"message\": \"should NOT be shorter than 2 characters\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "DELETE ingredient",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/ingredient/4",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"ingredient",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE ingredient - Non-existing ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/ingredient/99",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"ingredient",
+										"99"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-KaZTREMBkzSUppE4/GyPSfSw7XM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 23:26:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": -1,\n    \"errorMessage\": \"Record could not be deleted!\"\n}"
+						},
+						{
+							"name": "DELETE ingredient - Valid ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/ingredient/4",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"ingredient",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-nALfgZbm564PJvx4OYymauaDMRQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 23:25:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"errorMessage\": \"1 record deleted!\"\n}"
+						},
+						{
+							"name": "DELETE ingredient - Invalid ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/ingredient/-1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"ingredient",
+										"-1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "18"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12-f+3hdSC66EM8zs+iKspfvFnH9H0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Sep 2021 23:25:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid ID number."
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GET All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/user",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET All Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/user",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1446"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5a6-lsaDzZNgXz4RqzlGD+/skfbXnVk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:07:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"userId\": 3,\n        \"address\": \"Brace Jerkovic 125\",\n        \"passwordHash\": \"$2b$11$Ng/0qB3lsKmYW5Uwzn2GXuIzTYst74pC//OBBiu7.F6JkY9gyMZtC\",\n        \"phoneNumber\": \"*381 0693098510\",\n        \"email\": \"test@gmail.com\",\n        \"isAdmin\": false,\n        \"createdAt\": \"2021-09-10T10:58:10.000Z\",\n        \"name\": \"Marko Kasporski :)\"\n    },\n    {\n        \"userId\": 5,\n        \"address\": \"Brace Jerkovic 125\",\n        \"passwordHash\": \"$2b$11$LYIPiIcZPTwlM0XzQUzQQ.ODcUPB4Ix/Y59POgKNc38JCGrouThoS\",\n        \"phoneNumber\": \"*381 0693098510\",\n        \"email\": \"test123@gmail.com\",\n        \"isAdmin\": true,\n        \"createdAt\": \"2021-09-10T11:44:52.000Z\",\n        \"name\": \"Marko Kasporski Registrovan\"\n    },\n    {\n        \"userId\": 6,\n        \"address\": \"zero\",\n        \"passwordHash\": \"$2b$11$Mv9xKni3beA/m.9XZrgdYus4ATnS7pORrJrcXtNO5NC6RJ9yqUaxi\",\n        \"phoneNumber\": \"who cares\",\n        \"email\": \"test1@gmail.com\",\n        \"isAdmin\": false,\n        \"createdAt\": \"2021-09-13T18:26:50.000Z\",\n        \"name\": \"Test\"\n    },\n    {\n        \"userId\": 7,\n        \"address\": \"zero\",\n        \"passwordHash\": \"$2b$11$PhAutdAzYlgHqVA9d.yvU.DptcqGmhhkUBxXrrK8gqCFx4x5bmmBy\",\n        \"phoneNumber\": \"who cares\",\n        \"email\": \"test12@gmail.com\",\n        \"isAdmin\": false,\n        \"createdAt\": \"2021-09-13T18:28:06.000Z\",\n        \"name\": \"Test\"\n    },\n    {\n        \"userId\": 8,\n        \"address\": \"zero\",\n        \"passwordHash\": \"$2b$11$OoDjrEAmrnT8d7FVzM7kb.bFNId1STkE9VVYfo7BMe62UMLzNnCiy\",\n        \"phoneNumber\": \"who cares\",\n        \"email\": \"test126@gmail.com\",\n        \"isAdmin\": false,\n        \"createdAt\": \"2021-09-13T18:28:30.000Z\",\n        \"name\": \"Test\"\n    },\n    {\n        \"userId\": 9,\n        \"address\": \"123\",\n        \"passwordHash\": \"$2b$11$0ekFT9j7X4YodTGiVadUHeYLy2pFvVNBzMcxUHhJc9znya36Yp5PC\",\n        \"phoneNumber\": \"123\",\n        \"email\": \"maqi@gmail.com\",\n        \"isAdmin\": false,\n        \"createdAt\": \"2021-09-13T19:12:39.000Z\",\n        \"name\": \"123\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET user by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/user/-1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								"-1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET user by ID - Non-existing ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/user/99",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"99"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:11:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						},
+						{
+							"name": "GET user by ID - Invalid ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/user/-1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"-1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "18"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12-f+3hdSC66EM8zs+iKspfvFnH9H0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:11:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid ID number."
+						},
+						{
+							"name": "GET user by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/user/3",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "261"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"105-hNP5/GOQPHxAFePnuJC9xOjyZuY\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:07:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 3,\n    \"address\": \"Brace Jerkovic 125\",\n    \"passwordHash\": \"$2b$11$Ng/0qB3lsKmYW5Uwzn2GXuIzTYst74pC//OBBiu7.F6JkY9gyMZtC\",\n    \"phoneNumber\": \"*381 0693098510\",\n    \"email\": \"test@gmail.com\",\n    \"isAdmin\": false,\n    \"createdAt\": \"2021-09-10T10:58:10.000Z\",\n    \"name\": \"Marko Kasporski :)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "POST user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Marko\",\r\n    \"phoneNumber\": \"123123123\",\r\n    \"address\": \"Brace Jerkovic\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"user@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/user",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST user - Invalid Information",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Marko\",\r\n    \"phoneNumber\": \"123123123\",\r\n    \"address\": \"Brace Jerkovic\",\r\n    \"password\": \"3456\",\r\n    \"email\": \"a\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/user",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "168"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a8-XEY48sYioQXwSOhAvLHBWoZMmR4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:10:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"keyword\": \"minLength\",\n        \"dataPath\": \".password\",\n        \"schemaPath\": \"#/properties/password/minLength\",\n        \"params\": {\n            \"limit\": 6\n        },\n        \"message\": \"should NOT be shorter than 6 characters\"\n    }\n]"
+						},
+						{
+							"name": "POST user - Valid Information",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Marko\",\r\n    \"phoneNumber\": \"123123123\",\r\n    \"address\": \"Brace Jerkovic\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"user@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/user",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "239"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ef-8Sj7TRXZPdOYUyzc9YuKTTherD8\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:10:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 16,\n    \"address\": \"Brace Jerkovic\",\n    \"passwordHash\": \"$2b$11$qRt3A2UacJoooPk14UX00eR5xNsQ6NcAz1e9mTqRIorNgkcg97RLa\",\n    \"phoneNumber\": \"123123123\",\n    \"email\": \"user@gmail.com\",\n    \"isAdmin\": false,\n    \"createdAt\": \"2021-09-14T18:10:10.000Z\",\n    \"name\": \"Marko\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/user/6",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE user - Invalid ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/user/-1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"-1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "18"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12-f+3hdSC66EM8zs+iKspfvFnH9H0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:12:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid ID number."
+						},
+						{
+							"name": "DELETE user - Non-existing ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/user/99",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"99"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-KaZTREMBkzSUppE4/GyPSfSw7XM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:12:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": -1,\n    \"errorMessage\": \"Record could not be deleted!\"\n}"
+						},
+						{
+							"name": "DELETE user - Valid User",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/user/6",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-nALfgZbm564PJvx4OYymauaDMRQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:12:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"errorMessage\": \"1 record deleted!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Marko 3\",\r\n    \"phoneNumber\": \"123123123\",\r\n    \"address\": \"Brace Jerkovic\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/user/7",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								"7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT user - Invalid Info",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"address\": \"Brace Jerkovic\",\r\n    \"password\": \"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/user/7",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"7"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "149"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"95-DIoyI2ZCdDQDyEsyLJjg1RV0iU8\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:15:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"keyword\": \"required\",\n        \"dataPath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"params\": {\n            \"missingProperty\": \"name\"\n        },\n        \"message\": \"should have required property 'name'\"\n    }\n]"
+						},
+						{
+							"name": "PUT user - Non-existing ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Marko 3\",\r\n    \"phoneNumber\": \"123123123\",\r\n    \"address\": \"Brace Jerkovic\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/user/99",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"99"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:14:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						},
+						{
+							"name": "PUT user - Invalid ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Marko 3\",\r\n    \"phoneNumber\": \"123123123\",\r\n    \"address\": \"Brace Jerkovic\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/user/-1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"-1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "18"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12-f+3hdSC66EM8zs+iKspfvFnH9H0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:14:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid ID number."
+						},
+						{
+							"name": "PUT user - Valid Info",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Marko 3\",\r\n    \"phoneNumber\": \"123123123\",\r\n    \"address\": \"Brace Jerkovic\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/user/7",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "242"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f2-f0riKXTyO1l0+RkgGPu5GWCaTyw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:13:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 7,\n    \"address\": \"Brace Jerkovic\",\n    \"passwordHash\": \"$2b$11$l75ulTym1FxImLPCQeOOq.ZYJbCnHB/tsnWAAUICJL8o/Ys5FNYCS\",\n    \"phoneNumber\": \"123123123\",\n    \"email\": \"test12@gmail.com\",\n    \"isAdmin\": false,\n    \"createdAt\": \"2021-09-13T18:28:06.000Z\",\n    \"name\": \"Marko 3\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "POST Auth Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test123@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/login",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Post Auth Login - Invalid Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"test123@gmail.com\",\r\n    \"password\": \"1234567\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/login",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "22"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16-fEc1WArHk5yVgGP5ekfvNKEEvfU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:00:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid user password."
+						},
+						{
+							"name": "POST Auth Login - Invalid Email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"test123a@gmail.com\",\r\n    \"password\": \"1234567\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/login",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "15"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f-nJhqOar/xeDvvHbHPX2d3SIgPVY\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:01:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "User not found."
+						},
+						{
+							"name": "POST Auth Login - Valid Credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"test123@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/login",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1121"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"461-kndOmGLGJQDqg9gZavAll9yI3k8\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 16:59:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"authToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJ0ZXN0MTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjMxNjM4Nzc3LCJleHAiOjE2MzE3MjUxNzcsImlzcyI6ImxvY2FsaG9zdCJ9.KiwHY2H_r1g0DA4uytVtYli9byXLCmtXN8l0qc88ILdGMJJkrKtYz_hu8zoqgSYcJz3FvcKLW2zErPIVuQJLU1OG6ss73Phcl8gc4MRCbXT4J-9mc0iyjZ4oj0P95qU7ZIA27T_PUrQvR71hSNnZkltuSn0uvmnxKulL5sFJ03setdC_713N6fBNCekNnd4wu1lvY1KGMqPP2BJ6az4TtloqoeaUbTgc8hErUuxr-6PqRp5zg1MwLHStfCP5JeJzl3Ysmme-5mPX_Oa6uWMiY9byavVMFwHsadR_AfD2CGqPOM7pLxhjeUUYPWfP4x9FHqB7LeaqdpcKF9zuY62R5g\",\n    \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJ0ZXN0MTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjMxNjM4Nzc3LCJleHAiOjE2NjMxNzQ3NzcsImlzcyI6ImxvY2FsaG9zdCJ9.kWGgjdilZU6SznNcehHlulAqlmk0G7BvPJjsTOfnvzAOlB6OUvqdfks6IZIsvSWnZ1lpRdZwAN0fgI_K3elQLdfnqVc9sINdL3vZk65b-NV_V0NT5GGK7rzYt7oGicqEl6RYNTqmBfoyC-js61qcPj2tuU7NnCzR--YbF9gDOQgz8_35_T0zAOJAmohp8iCmu_JjKE0CXVYX1VzIJpWqWE8YWC-8FW81mFABCjaRzACVrJYOIucX8-Xfj7nBU7a76dVgkb4IeKgtaS-vUXSGVph8mpejas9BU8ZOETi0BTCm8HcySDCTHHZonmoSt7DPy54lRGalSJNssd-GKMJSMQ\",\n    \"role\": \"administrator\"\n}"
+						}
+					]
+				},
+				{
+					"name": "POST Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJ0ZXN0MTIzQINdL3vZk65b-NV_V0NT5GGK7rzYt7oGicqEl6RYNTqmBfoyC-js61qcPj2tuU7NnCzR--YbF9gDOQgz8_35_T0zAOJAmohp8iCmu_JjKE0CXVYX1VzIJpWqWE8YWC-8FW81mFABCjaRzACVrJYOIucX8-Xfj7nBU7a76dVgkb4IeKgtaS-vUXSGVph8mpejas9BU8ZOETi0BTCm8HcySDCTHHZonmoSt7DPy54lRGalSJNssd-GKMJSMQ\",\r\n    \"role\": \"administrator\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/refresh",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST Refresh Token - Invalid Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJ0ZXN0MTIzQINdL3vZk65b-NV_V0NT5GGK7rzYt7oGicqEl6RYNTqmBfoyC-js61qcPj2tuU7NnCzR--YbF9gDOQgz8_35_T0zAOJAmohp8iCmu_JjKE0CXVYX1VzIJpWqWE8YWC-8FW81mFABCjaRzACVrJYOIucX8-Xfj7nBU7a76dVgkb4IeKgtaS-vUXSGVph8mpejas9BU8ZOETi0BTCm8HcySDCTHHZonmoSt7DPy54lRGalSJNssd-GKMJSMQ\",\r\n    \"role\": \"administrator\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/refresh",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"refresh"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-vLlyS2pMbCAEtyMfR6uXSAxQ+Zw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:04:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid refresh token jwt malformed"
+						},
+						{
+							"name": "POST Refresh Token - Valid Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJ0ZXN0MTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjMxNjM4Nzc3LCJleHAiOjE2NjMxNzQ3NzcsImlzcyI6ImxvY2FsaG9zdCJ9.kWGgjdilZU6SznNcehHlulAqlmk0G7BvPJjsTOfnvzAOlB6OUvqdfks6IZIsvSWnZ1lpRdZwAN0fgI_K3elQLdfnqVc9sINdL3vZk65b-NV_V0NT5GGK7rzYt7oGicqEl6RYNTqmBfoyC-js61qcPj2tuU7NnCzR--YbF9gDOQgz8_35_T0zAOJAmohp8iCmu_JjKE0CXVYX1VzIJpWqWE8YWC-8FW81mFABCjaRzACVrJYOIucX8-Xfj7nBU7a76dVgkb4IeKgtaS-vUXSGVph8mpejas9BU8ZOETi0BTCm8HcySDCTHHZonmoSt7DPy54lRGalSJNssd-GKMJSMQ\",\r\n    \"role\": \"administrator\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/refresh",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"refresh"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "591"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"24f-taaZACVUWJzvCFPJ26+1rqFTc2I\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:03:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"authToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJ0ZXN0MTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjMxNjM5MDM2LCJleHAiOjE2MzE3MjU0MzYsImlzcyI6ImxvY2FsaG9zdCJ9.IsMiyjABNIXixgdRtHzpdCsJAXDwJS59SjzK3ahxxujDbS6jfA43VrmtIO9JHM68oUtWl2pJdFtwA3Dt-EKnL-_6UacVgzKGxrHAr6o_h6lqE_t8WGIrvIUVn4wo4uiOcHz1O64jSn9TTYzWzZvDvSmQb8B2PFRWtrcSy7Ik6TPsytKj9p6Hp2rpJm2vjeP8zidoZxW4e1A_169fCPLOI37JrUmAUhNYMbrtaYN7mSC0qs0gBIkz6SVBBep5Eqf26IHfDlH615dQT-r7wRfW7X8gUqnKV_iuS94exLbdaHCMlBjXedioxxg6MViQESmbTaLvBELWYIpMV8iNo2y_Mw\",\n    \"refreshToken\": null,\n    \"role\": \"administrator\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GET User OK",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": [
+						{
+							"name": "GET User OK - Invalid Token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/auth/user",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"user"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e-H8u/v2dMTlrhzqOvyAZrq+SgaTw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:20:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Access denied!"
+						}
+					]
+				},
+				{
+					"name": "GET Admin OK",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": [
+						{
+							"name": "GET Admin OK - Valid Token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/auth/administrator",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"administrator"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2-nOO9QiTIwXgNtWtBJezz8kv3SLc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 14 Sep 2021 17:21:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "OK"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWRlbnRpdHkiOiJ0ZXN0MTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjMxNjM4Nzc3LCJleHAiOjE2MzE3MjUxNzcsImlzcyI6ImxvY2FsaG9zdCJ9.KiwHY2H_r1g0DA4uytVtYli9byXLCmtXN8l0qc88ILdGMJJkrKtYz_hu8zoqgSYcJz3FvcKLW2zErPIVuQJLU1OG6ss73Phcl8gc4MRCbXT4J-9mc0iyjZ4oj0P95qU7ZIA27T_PUrQvR71hSNnZkltuSn0uvmnxKulL5sFJ03setdC_713N6fBNCekNnd4wu1lvY1KGMqPP2BJ6az4TtloqoeaUbTgc8hErUuxr-6PqRp5zg1MwLHStfCP5JeJzl3Ysmme-5mPX_Oa6uWMiY9byavVMFwHsadR_AfD2CGqPOM7pLxhjeUUYPWfP4x9FHqB7LeaqdpcKF9zuY62R5g",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_URL",
+			"value": "localhost:42051"
+		}
+	]
+}
