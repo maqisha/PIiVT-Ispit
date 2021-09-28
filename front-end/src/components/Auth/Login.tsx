@@ -63,7 +63,7 @@ const Login = () => {
                     <form noValidate autoComplete="off">
                         <TextField className="input" label="E-mail" required value={email} onChange={e => setEmail(e.target.value)} />
                         <TextField className="input" label="Password" required value={pass} onChange={e => setPass(e.target.value)} type="password" />
-                        <Button variant="contained" color="primary" onClick={login}> Login </Button>
+                        <Button variant="contained" color="primary" onClick={login} disabled={pass.length < 6}> Login </Button>
                     </form>
                     :
                     <form noValidate autoComplete="off">
@@ -72,7 +72,7 @@ const Login = () => {
                         <TextField className="input" label="Name" required value={name} onChange={e => setName(e.target.value)} />
                         <TextField className="input" label="Address" required value={address} onChange={e => setAddress(e.target.value)} />
                         <TextField className="input" label="Phone" required value={phone} onChange={e => setPhone(e.target.value)} />
-                        <Button variant="contained" color="primary" onClick={register}> Register </Button>
+                        <Button variant="contained" color="primary" onClick={register} disabled={pass.length < 6}> Register </Button>
                     </form>
             }
 
